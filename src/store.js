@@ -1,17 +1,30 @@
 import { createStore } from 'vuex'
 //import createPersistedState from "vuex-persistedstate"
 
+
+
+// とりあえず バックグラウンドの分だけ
 export const store = createStore({
     state() {
         return {
-            var1: 'hoge',
-            painted: false
+            started   : false,
+            painted   : false,
+            completed : false,
+            killed    : false
         }
     },
 
-    mutations: {
-        func1: (state) => {
-            state.var1 = 'foo'
-        }
+    getters : {
+        started    : state => state.started,
+        painted    : state => state.painted,
+        completed  : state => state.completed,
+        killed     : state => state.killed
+    },
+
+    mutations : {
+        start      : state  => { state.started   = true },
+        paint      : state  => { state.painted   = true },
+        complete   : state  => { state.completed = true },
+        kill       : state  => { state.killed    = true }
     }
 })

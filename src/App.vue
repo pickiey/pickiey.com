@@ -1,8 +1,9 @@
 <template lang="pug">
+p App.vue
 .default
 //-    HelloWorld
 
-    TheBackground
+TheBackground
 
 //-    #scrollArea
 //-        router-view
@@ -12,11 +13,12 @@
 //-    TheFirstview
 
 //-    TheAudio
+p /App.vue
 </template>
 
 <script>
-import { reactive, computed , onMounted } from 'vue'
-import { useStore } from 'vuex'
+//import { reactive, computed , onMounted } from 'vue'
+//import { useStore } from 'vuex'
 
 //import HelloWorld          from './components/HelloWorld.vue'
 
@@ -29,28 +31,23 @@ import TheBackground       from './components/TheBackground.vue'
 export default {
     components: {
         TheBackground
-    },
-    setup() {
-        const data = reactive({
-            store: useStore()
-        })
-
-        const painted = computed( () => data.store.state.painted )
-
-        onMounted( () => {
-            const userAgent = window.navigator.userAgent.toLowerCase()
-
-            if (
-                userAgent.indexOf('msie')    !== -1 ||
-                userAgent.indexOf('trident') !== -1 ||
-                userAgent.indexOf('edge')    !== -1
-            ) {
-                $router.push({ path: 'sorry' })
-            }
-        })
-
     }
+
+//    setup() {
+        //onMounted( () => {
+        //    const userAgent = window.navigator.userAgent.toLowerCase()
+
+            //if (
+            //    userAgent.indexOf('msie')    !== -1 ||
+            //    userAgent.indexOf('trident') !== -1 ||
+            //    userAgent.indexOf('edge')    !== -1
+            //) {
+            //    $router.push({ path: 'sorry' })
+            //}
+//    }
+
 }
+
 </script>
 
 <style lang="stylus" scoped>

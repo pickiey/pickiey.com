@@ -1,11 +1,9 @@
 <template lang="pug">
-p TheBackground.vue
-p {{ isMobile }}
 .TheBg
     .TheBg_Title(ref='title')
         .TheBg_TitleShadow(ref='shadow')        {{ data.sitename }}
         .TheBg_TitleFace(ref='face')            {{ data.sitename }}
-    canvas#canvas(ref='canvas')
+    canvas#canvas
     .TheBg_Layer.TheBg_Layer3(ref='layer3')
         .TheBg_LayerInner
             .tbc                                {{ data.sitename }}
@@ -14,86 +12,63 @@ p {{ isMobile }}
             .tbc                                {{ data.sitename }}
     .TheBg_Layer.TheBg_Layer1(ref='layer1')
         .TheBg_LayerInner
-            .tbc {{ data.sitename }}
-p /TheBackground.vue
+            .tbc                                {{ data.sitename }}
 </template>
 
 <!--
+.TheBg
+    p TheBackground
     p {{data.sitename}}
 -->
 
 
-
-
+<!--
 <script>
-import { computed, reactive, watch } from 'vue'
+import { mapGetters }             from 'vuex'
 import { TweenMax, Expo, Power0 } from 'gsap'
-import { useStore } from 'vuex'
-
 
 export default {
-    props: {
-        sitename: String,
-        isMobile: Boolean
+    data() {
+        return {
+            sitename    :   'pickiey portfolio',
+            isMobile    :   this.$device.isMobile
+        }
     },
 
-    setup(props) {
-        const data = reactive({
-            sitename: 'pickiey.portfolio',
-            isMobile: false
+    computed: {
+        ...mapGetters({
+            painted     :   'firstview/painted',
+            completed   :   'firstview/completed'
         })
+    },
 
-        const store = useStore()
-        const painted   = computed( () => store.getters.painted   )
-        const completed = computed( () => store.getters.completed )
-
-        watch(
-            painted, () => {
-                console.log('painted')
-                //this.$el.style.opacity          = 1
-                //this.$refs.layer1.style.opacity = 1
-                //this.$refs.layer2.style.opacity = 1
-                //this.$refs.layer3.style.opacity = 1
-            },
-
-            completed, () => {
-                console.log('completed')
-                //this.canvasAnimation()
-                //await this.$delay(130)
-                //this.clip1()
-                //await this.$delay(130)
-                //this.clip2()
-                //await this.$delay(130)
-                //this.clip3()
-                //await this.$delay(200)
-                //this.spout()
-                //await this.$delay(1000)
-                //this.leaveLayer()
-                //await this.$delay(4000)
-                //this.rotate()
-            }
-        )
-
-
-        // mixin
-        const imageOnLoad = (src, func) => {
-            const img = new Image()
-            img.onload = () => {
-                func()
-            }
-            img.src = src
+    watch: {
+        painted() {
+            this.$el.style.opacity          = 1
+            this.$refs.layer1.style.opacity = 1
+            this.$refs.layer2.style.opacity = 1
+            this.$refs.layer3.style.opacity = 1
+        },
+        async completed() {
+            this.canvasAnimation()
+            await this.$delay(130)
+            this.clip1()
+            await this.$delay(130)
+            this.clip2()
+            await this.$delay(130)
+            this.clip3()
+            await this.$delay(200)
+            this.spout()
+            await this.$delay(1000)
+            this.leaveLayer()
+            await this.$delay(4000)
+            this.rotate()
         }
+    },
 
-        const delay = (ms) => {
-            return new Promise(
-                resolve => setTimeout(resolve, ms)
-            )
-        }
-
-        // 以下 アニメーション定義
-
-        const spout = () => {
-            requestAnimationFrame( () => {
+    methods: {
+        spout() {
+            requestAnimationFrame(() => {
                 TweenMax.to('#canvas', 5, {
                     scale       : 1,
                     ease        : Expo.easeInOut
@@ -104,31 +79,30 @@ export default {
                     ease        : Expo.easeInOut
                 })
                 TweenMax.to(this.$refs.shadow, 5, {
-                    y           : data.isMobile ? '1.25px' : '2.5px',
-                    x           : data.isMobile ? '1.25px' : '2.5px',
+                    y           : this.isMobile ? '1.25px' : '2.5px',
+                    x           : this.isMobile ? '1.25px' : '2.5px',
                     ease        : Expo.easeInOut
                 })
                 TweenMax.to(this.$refs.face, 5, {
-                    y           : data.isMobile ? '-1.25px' : '-2.5px',
-                    x           : data.isMobile ? '-1.25px' : '-2.5px',
+                    y           : this.isMobile ? '-1.25px' : '-2.5px',
+                    x           : this.isMobile ? '-1.25px' : '-2.5px',
                     ease        : Expo.easeInOut
                 })
             })
-        }
+        },
 
-        // this.isMobile かもしれない
-        const leaveLayer = () => {
-            if (data.isMobile) return
-            requestAnimationFrame( () => {
+        leaveLayer() {
+            if (this.isMobile) return
+            requestAnimationFrame(() => {
                 TweenMax.to('.TheBg_LayerInner', 2, {
                     opacity     : 0,
                     ease        : Expo.easeInOut
                 })
             })
-        }
+        },
 
-        const rotate = () => {
-            requestAnimationFrame( () => {
+        rotate() {
+            requestAnimationFrame(() => {
                 TweenMax.to(this.$refs.title, 150, {
                     rotation: 365,
                     startAt: {
@@ -138,38 +112,37 @@ export default {
                     repeat      : -1
                 })
             })
-        }
+        },
 
-        const clip1 = () => {
-            requestAnimationFrame( () => {
+        clip1() {
+            requestAnimationFrame(() => {
                 TweenMax.to(this.$refs.layer1, 1.3, {
-                    width       : data.isMobile ? '0%' : '50px',
+                    width       : this.isMobile ? '0%' : '50px',
                     ease        : Expo.easeOut
                 })
             })
-        }
+        },
 
-        const clip2 = () => {
-            requestAnimationFrame( () => {
+        clip2() {
+            requestAnimationFrame(() => {
                 TweenMax.to(this.$refs.layer2, 1.3, {
-                    width       : data.isMobile ? '0%' : '150px',
+                    width       : this.isMobile ? '0%' : '150px',
                     ease        : Expo.easeOut
                 })
             })
-        }
+        },
 
-        const clip3 = () => {
-          requestAnimationFrame( () => {
+        clip3() {
+          requestAnimationFrame(() => {
             TweenMax.to(this.$refs.layer3, 1.3, {
-              width: data.isMobile ? '0%' : '300px',
+              width: this.isMobile ? '0%' : '300px',
               ease: Expo.easeOut
             })
           })
-        }
+        },
 
-        // this.isMobile かもしれない
-        const canvasAnimation = () => {
-            const isMobile = data.isMobile
+        canvasAnimation() {
+            const isMobile = this.isMobile
             /**
              * Generates random particles using canvas
              *
@@ -198,11 +171,8 @@ export default {
                     // number of particles
                     this.numParticles = isMobile ? 60 : 120
                     // required canvas variables
-                    console.log(this)
-                    this.canvas = this.$ref.canvas
-                    //this.canvas = document.getElementById('canvas')
+                    this.canvas = document.getElementById('canvas')
                     this.ctx = this.canvas.getContext('2d')
-                    //this.ctx = this.canvas.getContext('2d')
                 }
 
                 /**
@@ -387,24 +357,27 @@ export default {
             const particle = new Particles()
             particle.init()
         }
-
-
-        canvasAnimation()
-        //await this.$delay(130)
-        //this.clip1()
-        //await this.$delay(130)
-        //this.clip2()
-        //await this.$delay(130)
-        //this.clip3()
-        //await this.$delay(200)
-        //this.spout()
-        //await this.$delay(1000)
-        //this.leaveLayer()
-        //await this.$delay(4000)
-        //this.rotate()
+    }
+}
+</script>
+-->
 
 
 
+
+
+
+<!--
+export default {
+    props: {
+        sitename: String,
+        isMobile: Boolean
+    },
+    setup() {
+        const data = reactive({
+            sitename: 'Pickiey',
+            isMobile: false
+        })
 
         // Firtsview の painted と completed の変更を監視
 
@@ -412,18 +385,20 @@ export default {
         // spout -> leaveLayer -> rotate -> clip1 -> clip2 -> clip3
         // -> canvasAnimation
 
-        // retrun することで､テンプレート内で使用できるようになる
+
+
+
         return{
             data
         }
     }
 }
 </script>
-
-
-
-<!--
 -->
+
+
+
+
 <style lang="stylus" scoped>
 @import "../assets/stylus/mixins.styl"
 @import "../assets/stylus/variables.styl"
