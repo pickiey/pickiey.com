@@ -2,6 +2,9 @@
 p App.vue
 .default
 //-    HelloWorld
+//-Test
+
+
 
 TheBackground
 
@@ -21,6 +24,7 @@ p /App.vue
 //import { useStore } from 'vuex'
 
 //import HelloWorld          from './components/HelloWorld.vue'
+//import Test          from './components/Test.vue'
 
 import TheBackground       from './components/TheBackground.vue'
 //import TheHome       from '~/components/TheHome.vue'
@@ -30,6 +34,7 @@ import TheBackground       from './components/TheBackground.vue'
 
 export default {
     components: {
+        //Test
         TheBackground
     }
 

@@ -1,20 +1,26 @@
 <template lang="pug">
 p TheBackground.vue
-p {{ isMobile }}
+p {{ data.isMobile }}
+
 .TheBg
     .TheBg_Title(ref='title')
         .TheBg_TitleShadow(ref='shadow')        {{ data.sitename }}
         .TheBg_TitleFace(ref='face')            {{ data.sitename }}
-    canvas#canvas(ref='canvas')
+
+    canvas#canvas
+
     .TheBg_Layer.TheBg_Layer3(ref='layer3')
         .TheBg_LayerInner
             .tbc                                {{ data.sitename }}
+
     .TheBg_Layer.TheBg_Layer2(ref='layer2')
         .TheBg_LayerInner
             .tbc                                {{ data.sitename }}
+
     .TheBg_Layer.TheBg_Layer1(ref='layer1')
-        .TheBg_LayerInner
-            .tbc {{ data.sitename }}
+        .TheBg_LayerInner(ref='inner')
+            .tbc                                {{ data.sitename }}
+
 p /TheBackground.vue
 </template>
 
@@ -22,160 +28,204 @@ p /TheBackground.vue
     p {{data.sitename}}
 -->
 
+<!--
+    ref されているのは
+    title, shadow, face, layer1, layer2, layer3
 
+    追加したのは canvas
+-->
 
 
 <script>
-import { computed, reactive, watch } from 'vue'
-import { TweenMax, Expo, Power0 } from 'gsap'
+import { onMounted, computed, reactive, ref, watch } from 'vue'
+import { gsap } from 'gsap'
 import { useStore } from 'vuex'
 
 
 export default {
-    props: {
-        sitename: String,
-        isMobile: Boolean
-    },
+    setup() {
 
-    setup(props) {
         const data = reactive({
             sitename: 'pickiey.portfolio',
             isMobile: false
         })
 
-        const store = useStore()
-        const painted   = computed( () => store.getters.painted   )
-        const completed = computed( () => store.getters.completed )
+        //const store = useStore()
+        //const painted   = computed( () => store.getters.painted   )
+        //const completed = computed( () => store.getters.completed )
 
-        watch(
-            painted, () => {
-                console.log('painted')
-                //this.$el.style.opacity          = 1
-                //this.$refs.layer1.style.opacity = 1
-                //this.$refs.layer2.style.opacity = 1
-                //this.$refs.layer3.style.opacity = 1
-            },
+        //watch(
+        //    painted, () => {
+        //        console.log('painted')
+        //        //this.$el.style.opacity          = 1
+        //        //this.$refs.layer1.style.opacity = 1
+        //        //this.$refs.layer2.style.opacity = 1
+        //        //this.$refs.layer3.style.opacity = 1
+        //    },
 
-            completed, () => {
-                console.log('completed')
-                //this.canvasAnimation()
-                //await this.$delay(130)
-                //this.clip1()
-                //await this.$delay(130)
-                //this.clip2()
-                //await this.$delay(130)
-                //this.clip3()
-                //await this.$delay(200)
-                //this.spout()
-                //await this.$delay(1000)
-                //this.leaveLayer()
-                //await this.$delay(4000)
-                //this.rotate()
-            }
-        )
+        //    completed, () => {
+        //        console.log('completed')
+        //        //this.canvasAnimation()
+        //        //await this.$delay(130)
+        //        //this.clip1()
+        //        //await this.$delay(130)
+        //        //this.clip2()
+        //        //await this.$delay(130)
+        //        //this.clip3()
+        //        //await this.$delay(200)
+        //        //this.spout()
+        //        //await this.$delay(1000)
+        //        //this.leaveLayer()
+        //        //await this.$delay(4000)
+        //        //this.rotate()
+        //    }
+        //)
 
 
+        //
         // mixin
+        //
+
         const imageOnLoad = (src, func) => {
             const img = new Image()
+
             img.onload = () => {
                 func()
             }
+
             img.src = src
         }
 
+        // コールバック地獄の回避
         const delay = (ms) => {
             return new Promise(
                 resolve => setTimeout(resolve, ms)
             )
         }
 
+
+        //
         // 以下 アニメーション定義
+        //
+
+        const title  = ref(),
+              shadow = ref(),
+              face   = ref(),
+              layer1 = ref(),
+              layer2 = ref(),
+              layer3 = ref(),
+              inner  = ref()
+
+
 
         const spout = () => {
             requestAnimationFrame( () => {
-                TweenMax.to('#canvas', 5, {
+                //gsap.to(canvas.value, {
+                gsap.to('#canvas', {
+                    duration    : 5,
                     scale       : 1,
-                    ease        : Expo.easeInOut
+                    ease        : "expo.inOut"
                 })
-                TweenMax.to(this.$refs.title, 5, {
+                gsap.to(title.value, {
+                    duration    : 5,
                     scale       : 3,
                     rotation    : 365,
-                    ease        : Expo.easeInOut
+                    ease        : "expo.inOut"
                 })
-                TweenMax.to(this.$refs.shadow, 5, {
+                gsap.to(shadow.value, {
+                    duration    : 5,
                     y           : data.isMobile ? '1.25px' : '2.5px',
                     x           : data.isMobile ? '1.25px' : '2.5px',
-                    ease        : Expo.easeInOut
+                    ease        : "expo.inOut"
                 })
-                TweenMax.to(this.$refs.face, 5, {
+                gsap.to(face.value, {
+                    duration    : 5,
                     y           : data.isMobile ? '-1.25px' : '-2.5px',
                     x           : data.isMobile ? '-1.25px' : '-2.5px',
-                    ease        : Expo.easeInOut
+                    ease        : "expo.inOut"
                 })
             })
         }
 
-        // this.isMobile かもしれない
+
+
+        //const inner = document.getElementByClassName('TheBg_LayerInner')
+                //gsap.to('.TheBg_LayerInner', {
+                //gsap.to(inner.value, {
+
         const leaveLayer = () => {
             if (data.isMobile) return
             requestAnimationFrame( () => {
-                TweenMax.to('.TheBg_LayerInner', 2, {
+                gsap.to('.TheBg_LayerInner', {
+                    duration    : 2,
                     opacity     : 0,
-                    ease        : Expo.easeInOut
+                    ease        : "expo.inOut"
                 })
             })
         }
 
+
+
         const rotate = () => {
             requestAnimationFrame( () => {
-                TweenMax.to(this.$refs.title, 150, {
-                    rotation: 365,
-                    startAt: {
-                        rotation    : 5
-                    },
-                    ease        : Power0.easeNone,
+                gsap.to(title.value, {
+                    duration    : 150,
+                    rotation    : 365,
+                    startAt     : {rotation : 5},
+                    ease        : "none",
                     repeat      : -1
                 })
             })
         }
 
+
+
         const clip1 = () => {
             requestAnimationFrame( () => {
-                TweenMax.to(this.$refs.layer1, 1.3, {
+                gsap.to(layer1.value, {
+                    duration    : 1.3,
                     width       : data.isMobile ? '0%' : '50px',
-                    ease        : Expo.easeOut
+                    ease        : "expo.out"
                 })
             })
         }
+
+
 
         const clip2 = () => {
             requestAnimationFrame( () => {
-                TweenMax.to(this.$refs.layer2, 1.3, {
+                gsap.to(layer2.value, {
+                    duration    : 1.3,
                     width       : data.isMobile ? '0%' : '150px',
-                    ease        : Expo.easeOut
+                    ease        : "expo.out"
                 })
             })
         }
 
+
+
         const clip3 = () => {
-          requestAnimationFrame( () => {
-            TweenMax.to(this.$refs.layer3, 1.3, {
-              width: data.isMobile ? '0%' : '300px',
-              ease: Expo.easeOut
+            requestAnimationFrame( () => {
+                gsap.to(layer3.value, {
+                    duration    : 1.3,
+                    width       : data.isMobile ? '0%' : '300px',
+                    ease        : "expo.out"
+                })
             })
-          })
         }
 
-        // this.isMobile かもしれない
+
+
+        // return canvas わすれないこと
         const canvasAnimation = () => {
             const isMobile = data.isMobile
-            /**
-             * Generates random particles using canvas
-             *
-             * @class Particles
-             * @constructor
-             */
+
+            //
+            //Generates random particles using canvas
+            //
+            //@class Particles
+            //@constructor
+            //
             class Particles {
                 constructor() {
                     // particle colors
@@ -199,37 +249,37 @@ export default {
                     this.numParticles = isMobile ? 60 : 120
                     // required canvas variables
                     console.log(this)
-                    this.canvas = this.$ref.canvas
-                    //this.canvas = document.getElementById('canvas')
+                    //this.canvas = this.$ref.canvas
+                    this.canvas = document.getElementById('canvas')
                     this.ctx = this.canvas.getContext('2d')
                     //this.ctx = this.canvas.getContext('2d')
                 }
 
-                /**
-                 * Initializes everything
-                 * @method init
-                 */
+                //
+                //Initializes everything
+                //@method init
+                //
                 init() {
                     const self = this
                     self.render()
                     self.createCircle()
                 }
 
-                /**
-                 * generates random number between min and max values
-                 * @param  {number} min value
-                 * @param  {number} max malue
-                 * @return {number} random number between min and max
-                 * @method _rand
-                 */
+                //
+                //generates random number between min and max values
+                //@param  {number} min value
+                //@param  {number} max malue
+                //@return {number} random number between min and max
+                //@method _rand
+                //
                 _rand(min, max) {
                     return Math.random() * (max - min) + min
                 }
 
-                /**
-                 * Sets canvas size and updates values on resize
-                 * @method render
-                 */
+                //
+                //Sets canvas size and updates values on resize
+                //@method render
+                //
                 render() {
                     const self = this
                     const wHeight = document.getElementById('scrollArea').clientHeight
@@ -241,10 +291,10 @@ export default {
                     }
                 }
 
-                /**
-                 * Randomly creates particle attributes
-                 * @method createCircle
-                 */
+                //
+                //Randomly creates particle attributes
+                //@method createCircle
+                //
                 createCircle() {
                     const particle = []
                     const self = this
@@ -274,12 +324,12 @@ export default {
                     self.animate(particle)
                 }
 
-                /**
-                 * Draws particles on canvas
-                 * @param  {array} Particle array from createCircle method
-                 * @param  {number} i value from createCircle method
-                 * @method draw
-                 */
+                //
+                //Draws particles on canvas
+                //@param  {array} Particle array from createCircle method
+                //@param  {number} i value from createCircle method
+                //@method draw
+                //
                 draw(particle, i) {
                     const self = this
                     const ctx = self.ctx
@@ -320,11 +370,11 @@ export default {
                     ctx.fill()
                 }
 
-                /**
-                 * Animates particles
-                 * @param  {array} particle value from createCircle & draw methods
-                 * @method animate
-                 */
+                //
+                //Animates particles
+                //@param  {array} particle value from createCircle & draw methods
+                //@method animate
+                //
                 animate(particle) {
                     const self = this
                     // const ctx = self.ctx
@@ -350,12 +400,12 @@ export default {
                     }, 1000 / self.fps)
                 }
 
-                /**
-                 * Resets position of particle when it goes off screen
-                 * @param  {array} particle value from createCircle & draw methods
-                 * @param  {number} i value from createCircle method
-                 * @method resetParticle
-                 */
+                //
+                //Resets position of particle when it goes off screen
+                //@param  {array} particle value from createCircle & draw methods
+                //@param  {number} i value from createCircle method
+                //@method resetParticle
+                //
                 resetParticle(particle, i) {
                     const self = this
 
@@ -374,10 +424,10 @@ export default {
                     self.draw(particle, i)
                 }
 
-                /**
-                 * Clears canvas between animation frames
-                 * @method clearCanvas
-                 */
+                //
+                //Clears canvas between animation frames
+                //@method clearCanvas
+                //
                 clearCanvas() {
                     this.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
                 }
@@ -389,21 +439,24 @@ export default {
         }
 
 
-        canvasAnimation()
-        //await this.$delay(130)
-        //this.clip1()
-        //await this.$delay(130)
-        //this.clip2()
-        //await this.$delay(130)
-        //this.clip3()
-        //await this.$delay(200)
-        //this.spout()
-        //await this.$delay(1000)
-        //this.leaveLayer()
-        //await this.$delay(4000)
-        //this.rotate()
+        // canvas要素を使いたいから、マウントしてから実行する
+        //onMounted (() => {
+            //canvasAnimation()
+            //await delay(130)
+            clip1()
+            //await $delay(130)
+            clip2()
+            //await this.$delay(130)
+            clip3()
+            //await this.$delay(200)
+            spout()
+            //await this.$delay(1000)
+            leaveLayer()
+            //await this.$delay(4000)
+            rotate()
 
 
+        //})
 
 
         // Firtsview の painted と completed の変更を監視
@@ -412,9 +465,13 @@ export default {
         // spout -> leaveLayer -> rotate -> clip1 -> clip2 -> clip3
         // -> canvasAnimation
 
+
+
         // retrun することで､テンプレート内で使用できるようになる
         return{
-            data
+            data,  delay,
+            title, shadow, face, layer1, layer2, layer3,
+            spout, leaveLayer, rotate, clip1, clip2, clip3
         }
     }
 }
