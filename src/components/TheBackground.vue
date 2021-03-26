@@ -113,8 +113,7 @@ export default {
               face   = ref(),
               layer1 = ref(),
               layer2 = ref(),
-              layer3 = ref(),
-              inner  = ref()
+              layer3 = ref()
 
 
 
@@ -155,6 +154,7 @@ export default {
 
         const leaveLayer = () => {
             if (data.isMobile) return
+
             requestAnimationFrame( () => {
                 gsap.to('.TheBg_LayerInner', {
                     duration    : 2,
@@ -219,6 +219,8 @@ export default {
         // return canvas わすれないこと
         const canvasAnimation = () => {
             const isMobile = data.isMobile
+            const canvas   = document.getElementById('canvas')
+            const ctx      = canvas.getContext('2d')
 
             //
             //Generates random particles using canvas
@@ -251,7 +253,7 @@ export default {
                     console.log(this)
                     //this.canvas = this.$ref.canvas
                     this.canvas = document.getElementById('canvas')
-                    this.ctx = this.canvas.getContext('2d')
+                    this.ctx = ctx
                     //this.ctx = this.canvas.getContext('2d')
                 }
 
@@ -330,6 +332,7 @@ export default {
                 //@param  {number} i value from createCircle method
                 //@method draw
                 //
+
                 draw(particle, i) {
                     const self = this
                     const ctx = self.ctx
@@ -375,6 +378,7 @@ export default {
                 //@param  {array} particle value from createCircle & draw methods
                 //@method animate
                 //
+
                 animate(particle) {
                     const self = this
                     // const ctx = self.ctx
@@ -441,7 +445,7 @@ export default {
 
         // canvas要素を使いたいから、マウントしてから実行する
         //onMounted (() => {
-            //canvasAnimation()
+            canvasAnimation()
             //await delay(130)
             clip1()
             //await $delay(130)
@@ -471,7 +475,8 @@ export default {
         return{
             data,  delay,
             title, shadow, face, layer1, layer2, layer3,
-            spout, leaveLayer, rotate, clip1, clip2, clip3
+            spout, leaveLayer, rotate, clip1, clip2, clip3,
+            canvasAnimation
         }
     }
 }
