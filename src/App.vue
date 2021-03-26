@@ -7,8 +7,7 @@ p App.vue
 
 
 TheBackground
-
-//-    #scrollArea
+#scrollArea
 //-        router-view
 
 //-    TheNav

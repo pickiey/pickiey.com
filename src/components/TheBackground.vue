@@ -1,39 +1,20 @@
 <template lang="pug">
-p TheBackground.vue
-p {{ data.isMobile }}
-
 .TheBg
     .TheBg_Title(ref='title')
         .TheBg_TitleShadow(ref='shadow')        {{ data.sitename }}
         .TheBg_TitleFace(ref='face')            {{ data.sitename }}
-
     canvas#canvas
-
     .TheBg_Layer.TheBg_Layer3(ref='layer3')
         .TheBg_LayerInner
             .tbc                                {{ data.sitename }}
-
     .TheBg_Layer.TheBg_Layer2(ref='layer2')
         .TheBg_LayerInner
             .tbc                                {{ data.sitename }}
-
     .TheBg_Layer.TheBg_Layer1(ref='layer1')
         .TheBg_LayerInner(ref='inner')
             .tbc                                {{ data.sitename }}
-
-p /TheBackground.vue
 </template>
 
-<!--
-    p {{data.sitename}}
--->
-
-<!--
-    ref されているのは
-    title, shadow, face, layer1, layer2, layer3
-
-    追加したのは canvas
--->
 
 
 <script>
@@ -50,63 +31,13 @@ export default {
             isMobile: false
         })
 
-        //const store = useStore()
-        //const painted   = computed( () => store.getters.painted   )
-        //const completed = computed( () => store.getters.completed )
-
-        //watch(
-        //    painted, () => {
-        //        console.log('painted')
-        //        //this.$el.style.opacity          = 1
-        //        //this.$refs.layer1.style.opacity = 1
-        //        //this.$refs.layer2.style.opacity = 1
-        //        //this.$refs.layer3.style.opacity = 1
-        //    },
-
-        //    completed, () => {
-        //        console.log('completed')
-        //        //this.canvasAnimation()
-        //        //await this.$delay(130)
-        //        //this.clip1()
-        //        //await this.$delay(130)
-        //        //this.clip2()
-        //        //await this.$delay(130)
-        //        //this.clip3()
-        //        //await this.$delay(200)
-        //        //this.spout()
-        //        //await this.$delay(1000)
-        //        //this.leaveLayer()
-        //        //await this.$delay(4000)
-        //        //this.rotate()
-        //    }
-        //)
 
 
-        //
-        // mixin
-        //
-
-        const imageOnLoad = (src, func) => {
-            const img = new Image()
-
-            img.onload = () => {
-                func()
-            }
-
-            img.src = src
-        }
-
-        // コールバック地獄の回避
-        const delay = (ms) => {
-            return new Promise(
-                resolve => setTimeout(resolve, ms)
-            )
-        }
+        const store     = useStore(),
+              painted   = computed( () => store.getters.painted   ),
+              completed = computed( () => store.getters.completed )
 
 
-        //
-        // 以下 アニメーション定義
-        //
 
         const title  = ref(),
               shadow = ref(),
@@ -116,6 +47,49 @@ export default {
               layer3 = ref()
 
 
+
+        onMounted(()=> {
+            watch(
+                () => painted, () => {
+                    this.$el.style.opacity          = 1
+                    this.$refs.layer1.style.opacity = 1
+                    this.$refs.layer2.style.opacity = 1
+                    this.$refs.layer3.style.opacity = 1
+
+                },
+
+                () => completed, async() => {
+                    canvasAnimation()
+                    await delay(130)
+                    clip1()
+                    await delay(130)
+                    clip2()
+                    await delay(130)
+                    clip3()
+                    await delay(200)
+                    spout()
+                    await delay(1000)
+                    leaveLayer()
+                    await delay(4000)
+                    rotate()
+                }
+            )
+        })
+
+
+
+        // コールバック地獄の回避
+        const delay = (ms) => {
+            return new Promise(
+                resolve => setTimeout(resolve, ms)
+            )
+        }
+
+
+
+        //
+        // 以下 アニメーション定義
+        //
 
         const spout = () => {
             requestAnimationFrame( () => {
@@ -147,10 +121,6 @@ export default {
         }
 
 
-
-        //const inner = document.getElementByClassName('TheBg_LayerInner')
-                //gsap.to('.TheBg_LayerInner', {
-                //gsap.to(inner.value, {
 
         const leaveLayer = () => {
             if (data.isMobile) return
@@ -216,87 +186,57 @@ export default {
 
 
 
-        // return canvas わすれないこと
         const canvasAnimation = () => {
             const isMobile = data.isMobile
-            const canvas   = document.getElementById('canvas')
-            const ctx      = canvas.getContext('2d')
 
-            //
-            //Generates random particles using canvas
-            //
-            //@class Particles
-            //@constructor
-            //
             class Particles {
+
                 constructor() {
-                    // particle colors
-                    this.colors = ['100, 100, 100', '130, 130, 130', '160, 160, 160']
-                    // adds gradient to particles on true
-                    this.blurry = false
-                    // adds white border
-                    this.border = false
-                    // particle radius min/max
-                    this.minRadius = 10
-                    this.maxRadius = 35
-                    // particle opacity min/max
-                    this.minOpacity = 0.005
-                    this.maxOpacity = 0.5
-                    // particle speed min/max
-                    this.minSpeed = 0.05
-                    this.maxSpeed = 0.5
-                    // frames per second
-                    this.fps = 60
-                    // number of particles
-                    this.numParticles = isMobile ? 60 : 120
-                    // required canvas variables
-                    console.log(this)
-                    //this.canvas = this.$ref.canvas
-                    this.canvas = document.getElementById('canvas')
-                    this.ctx = ctx
-                    //this.ctx = this.canvas.getContext('2d')
+                    this.colors         = ['100, 100, 100', '130, 130, 130', '160, 160, 160']
+                    this.blurry         = false
+                    this.border         = false
+                    this.minRadius      = 10
+                    this.maxRadius      = 35
+                    this.minOpacity     = 0.005
+                    this.maxOpacity     = 0.5
+                    this.minSpeed       = 0.05
+                    this.maxSpeed       = 0.5
+                    this.fps            = 60
+                    this.numParticles   = isMobile ? 60 : 120
+                    this.canvas         = document.getElementById('canvas')
+                    this.ctx            = this.canvas.getContext('2d')
                 }
 
-                //
-                //Initializes everything
-                //@method init
-                //
+
+
                 init() {
                     const self = this
                     self.render()
                     self.createCircle()
                 }
 
-                //
-                //generates random number between min and max values
-                //@param  {number} min value
-                //@param  {number} max malue
-                //@return {number} random number between min and max
-                //@method _rand
-                //
+
+
                 _rand(min, max) {
                     return Math.random() * (max - min) + min
                 }
 
-                //
-                //Sets canvas size and updates values on resize
-                //@method render
-                //
+
+
                 render() {
                     const self = this
-                    const wHeight = document.getElementById('scrollArea').clientHeight
-                    const wWidth = document.getElementById('scrollArea').clientWidth
-                    self.canvas.width = wWidth
-                    self.canvas.height = wHeight
+                    const windowHeight  = document.getElementById('scrollArea').clientHeight
+                    const windowWidth   = document.getElementById('scrollArea').clientWidth
+                    self.canvas.width   = windowWidth
+                    self.canvas.height  = windowHeight
+
                     window.onresize = () => {
                         self.render()
                     }
                 }
 
-                //
-                //Randomly creates particle attributes
-                //@method createCircle
-                //
+
+
                 createCircle() {
                     const particle = []
                     const self = this
@@ -319,40 +259,31 @@ export default {
                                            + ')'
                         }
 
-                        // once values are determined, draw particle on canvas
                         self.draw(particle, i)
                     }
-                    // ...and once drawn, animate the particle
                     self.animate(particle)
                 }
 
-                //
-                //Draws particles on canvas
-                //@param  {array} Particle array from createCircle method
-                //@param  {number} i value from createCircle method
-                //@method draw
-                //
+
 
                 draw(particle, i) {
                     const self = this
                     const ctx = self.ctx
 
                     if (self.blurry === true) {
-                        // creates gradient if blurry === true
                         const grd = ctx.createRadialGradient(
-                          particle[i].xPos,
-                          particle[i].yPos,
-                          particle[i].radius,
-                          particle[i].xPos,
-                          particle[i].yPos,
-                          particle[i].radius / 1.25
+                            particle[i].xPos,
+                            particle[i].yPos,
+                            particle[i].radius,
+                            particle[i].xPos,
+                            particle[i].yPos,
+                            particle[i].radius / 1.25
                         )
 
                         grd.addColorStop(1.0, particle[i].color)
                         grd.addColorStop(0.0, 'rgba(34, 34, 34, 0)')
                         ctx.fillStyle = grd
                     } else {
-                        // otherwise sets to solid color w/ opacity value
                         ctx.fillStyle = particle[i].color
                     }
 
@@ -373,27 +304,20 @@ export default {
                     ctx.fill()
                 }
 
-                //
-                //Animates particles
-                //@param  {array} particle value from createCircle & draw methods
-                //@method animate
-                //
+
 
                 animate(particle) {
                     const self = this
-                    // const ctx = self.ctx
 
                     setInterval(() => {
-                        // clears canvas
                         self.clearCanvas()
-                        // then redraws particles in new positions based on velocity
+
                         for (let i = 0; i < self.numParticles; i++) {
                             particle[i].xPos += particle[i].xVelocity
                             particle[i].yPos -= particle[i].yVelocity
 
-                            // if particle goes off screen call reset method to place it offscreen to the left/bottom
                             if (
-                                particle[i].xPos > self.canvas.width + particle[i].radius ||
+                                particle[i].xPos > self.canvas.width  + particle[i].radius ||
                                 particle[i].yPos > self.canvas.height + particle[i].radius
                             ) {
                                 self.resetParticle(particle, i)
@@ -404,76 +328,40 @@ export default {
                     }, 1000 / self.fps)
                 }
 
-                //
-                //Resets position of particle when it goes off screen
-                //@param  {array} particle value from createCircle & draw methods
-                //@param  {number} i value from createCircle method
-                //@method resetParticle
-                //
+
+
                 resetParticle(particle, i) {
                     const self = this
 
                     const random = self._rand(0, 1)
 
                     if (random > 0.5) {
-                        //  50% chance particle comes from left side of window...
                         particle[i].xPos = -particle[i].radius
                         particle[i].yPos = self._rand(0, self.canvas.height)
                     } else {
-                      // ... or bottom of window
                         particle[i].xPos = self._rand(0, self.canvas.width)
                         particle[i].yPos = self.canvas.height + particle[i].radius
                     }
-                    // redraw particle with new values
                     self.draw(particle, i)
                 }
 
-                //
-                //Clears canvas between animation frames
-                //@method clearCanvas
-                //
+
+
                 clearCanvas() {
                     this.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
                 }
             }
 
-            // go go go!
+
+
             const particle = new Particles()
             particle.init()
         }
 
 
-        // canvas要素を使いたいから、マウントしてから実行する
-        //onMounted (() => {
-            canvasAnimation()
-            //await delay(130)
-            clip1()
-            //await $delay(130)
-            clip2()
-            //await this.$delay(130)
-            clip3()
-            //await this.$delay(200)
-            spout()
-            //await this.$delay(1000)
-            leaveLayer()
-            //await this.$delay(4000)
-            rotate()
 
-
-        //})
-
-
-        // Firtsview の painted と completed の変更を監視
-
-        // アニメーションの定義
-        // spout -> leaveLayer -> rotate -> clip1 -> clip2 -> clip3
-        // -> canvasAnimation
-
-
-
-        // retrun することで､テンプレート内で使用できるようになる
         return{
-            data,  delay,
+            data, delay,
             title, shadow, face, layer1, layer2, layer3,
             spout, leaveLayer, rotate, clip1, clip2, clip3,
             canvasAnimation
@@ -484,8 +372,6 @@ export default {
 
 
 
-<!--
--->
 <style lang="stylus" scoped>
 @import "../assets/stylus/mixins.styl"
 @import "../assets/stylus/variables.styl"
