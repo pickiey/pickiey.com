@@ -1,32 +1,41 @@
 <template lang="pug">
 .default
+    TheNav
+    TheAudio
+</template>
+
+<!--
+.default
     TheBackground
     #scrollArea
         router-view
     TheNav
     TheFirstview
     TheAudio
-</template>
+-->
+
+
+
 
 <script>
 import { computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore }  from 'vuex'
-import TheBackground from './components/TheBackground.vue'
+//import TheBackground from './components/TheBackground.vue'
 import TheNav        from './components/TheNav.vue'
-import TheFirstview  from './components/TheFirstview.vue'
+//import TheFirstview  from './components/TheFirstview.vue'
 import TheAudio      from './components/TheAudio.vue'
 
 export default {
     components: {
-        TheBackground,
+//        TheBackground,
         TheNav,
-        TheFirstview,
+//        TheFirstview,
         TheAudio
     },
     setup() {
     //
-    // store
+    // router
     //
         const router = useRouter()
     //

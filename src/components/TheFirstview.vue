@@ -7,8 +7,8 @@
 
 <script>
 import TheFirstviewOpening from './TheFirstviewOpening.vue'
-import TheFirstviewStart   from './TheFirstviewStart.vue'
 import TheFirstviewLoading from './TheFirstviewLoading.vue'
+import TheFirstviewStart   from './TheFirstviewStart.vue'
 
 import { computed } from 'vue'
 import { useStore } from 'vuex'
@@ -16,8 +16,8 @@ import { useStore } from 'vuex'
 export default {
     components: {
         TheFirstviewOpening,
-        TheFirstviewStart,
-        TheFirstviewLoading
+        TheFirstviewLoading,
+        TheFirstviewStart
     },
     setup(){
     //

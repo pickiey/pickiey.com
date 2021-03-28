@@ -1,13 +1,13 @@
 <template lang="pug">
 .TheAudio
     audio(
-        src='/audio/click.mp3',
+        src='/assets/audio/click.mp3',
         :autoplay='data.isMobile',
         id='sound',
         @canplay='canplaySound'
     )
     audio(
-        src='/audio/bgm.mp3',
+        src='/assets/audio/bgm.mp3',
         loop,
         id='bgm',
         @canplay='canplayBgm',
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { reactive } from 'vue'
 import { useStore } from 'vuex'
 
 export default {

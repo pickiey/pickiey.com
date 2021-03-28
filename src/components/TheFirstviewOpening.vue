@@ -54,6 +54,12 @@ export default {
     //
         const started = computed( () => store.getters.started )
     //
+    // watch
+    //
+        watch(
+            () => started, () => startedAction()
+        ) // watch
+    //
     // data
     //
         const data = reactive({
@@ -93,12 +99,6 @@ export default {
     //
         const face = ref(),
               over = ref()
-    //
-    // watch
-    //
-        watch(
-            () => started, () => startedAction()
-        ) // watch
     //
     // methods
     //

@@ -12,7 +12,7 @@ transition(appear:false, v-on:enter="enter", v-on:leave="leave")
                 |                       デザインをデータにおこすことはせず、コードを書きながらデザインしていきます。
                 |                       制作の全行程を１人の人間が担うことで、細かなインタラクティブや、
                 |                       高い品質を提供することができます。
-            .thumbimg(:src='src' ref='thumb')
+            .thumbimg(:src='data.src' ref='thumb')
               canvas#canvasThumb
         .separator
         .section
@@ -102,13 +102,13 @@ export default {
     // data
     //
         const data = reactive({
-            src : '/thumbnail.jpg',
+            src : '/assets/image/thumbnail.jpg',
             url : url
         })
     //
     // this.$refs
     //
-        const thumb         = ref()
+        const thumb = ref()
     //
     // watch
     //

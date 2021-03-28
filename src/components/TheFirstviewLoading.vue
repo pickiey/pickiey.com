@@ -19,16 +19,6 @@ export default {
     //
         const loaded = computed( () => store.getters.loaded )
     //
-    // data
-    //
-        const data = reactive({
-            off : false
-        }) // data
-    //
-    // this.$refs
-    //
-        const gray = ref()
-    //
     // watch
     //
         watch(
@@ -40,6 +30,16 @@ export default {
         onMounted(
             () => mountedAction()
         ) // onMounted
+    //
+    // data
+    //
+        const data = reactive({
+            off : false
+        }) // data
+    //
+    // this.$refs
+    //
+        const gray = ref()
     //
     // methods
     //
