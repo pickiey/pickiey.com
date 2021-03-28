@@ -6,11 +6,12 @@
 </template>
 
 <script>
-import { mapGetters }      from 'vuex'
+import TheFirstviewOpening from './TheFirstviewOpening.vue'
+import TheFirstviewStart   from './TheFirstviewStart.vue'
+import TheFirstviewLoading from './TheFirstviewLoading.vue'
 
-import TheFirstviewOpening from './components/TheFirstviewOpening.vue'
-import TheFirstviewStart   from './components/TheFirstviewStart.vue'
-import TheFirstviewLoading from './components/TheFirstviewLoading.vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
     components: {
@@ -18,18 +19,29 @@ export default {
         TheFirstviewStart,
         TheFirstviewLoading
     },
-    computed: {
-        ...mapGetters({
-          killed: 'firstview/killed'
-        })
-    }
-}
+    setup(){
+    //
+    // store
+    //
+        const store = useStore()
+    //
+    // computed
+    //
+        const killed = computed( () => store.getters.killed )
+    //
+    // return
+    //
+        return{
+            killed
+        } // return
+    } // setup
+} // default
 </script>
 
 <style lang="stylus" scoped>
 .TheFirstview
-    position    absolute
-    top         0
-    width       100%
-    height      100%
+    position            absolute
+    top                 0
+    width               100%
+    height              100%
 </style>

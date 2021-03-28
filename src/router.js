@@ -1,20 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Index   from './components/Index.vue'
-//import About   from './components/About.vue'
-//import Contact from './components/Contact.vue'
+const routes = [
+    {
+        path      : '/',
+        component : () => import('./views/index.vue'),
+        name      : 'index'
+    }, {
+        path      : '/about',
+        component : () => import('./views/about.vue'),
+        name      : 'about'
+    }, {
+        path      : '/contact',
+        component : () => import('./views/contact.vue'),
+        name      : 'contact'
+    }, {
+        path      : '/sorry',
+        component : () => import('./views/sorry.vue'),
+        name      : 'sorry'
+    }
+]
 
+const routerOptions = {
+    linkActiveClass      : 'active-link',
+    linkExactActiveClass : 'exact-active-link',
+    fallback             : false,
+    history              : createWebHistory(),
+    routes               : routes,
+}
 
-
-export const router = createRouter({
-    history: createWebHistory(),
-    routes : [
-        {path: '/'       , name: 'index'  , component: Index  },
-    ]
-})
-
-
-
-
-//        {path: '/about'  , name: 'about'  , component: About  },
-//        {path: '/contact', name: 'contact', component: Contact}
+export const router = createRouter(routerOptions)
