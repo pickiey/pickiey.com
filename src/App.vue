@@ -75,7 +75,7 @@ console.log('App        mountedAction   done!')
 
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 @import "assets/stylus/mixins.styl"
 @import "assets/stylus/variables.styl"
 
