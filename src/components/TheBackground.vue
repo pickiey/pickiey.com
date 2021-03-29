@@ -1,5 +1,5 @@
 <template lang="pug">
-.TheBg
+.TheBg(ref='root')
     .TheBg_Title(ref='title')
         .TheBg_TitleShadow(ref='shadow')        {{ data.sitename }}
         .TheBg_TitleFace(ref='face')            {{ data.sitename }}
@@ -38,12 +38,12 @@ export default {
             () => painted.value,   () => paintedAction(),
         ) // watch
         const paintedAction = () => {
-console.log('BG paintedAction start!')
-            document.getElementById('app').style.opacity = 1
+console.log('BG         paintedAction   start!')
+            root.value.style.opacity   = 1
             layer1.value.style.opacity = 1
             layer2.value.style.opacity = 1
             layer3.value.style.opacity = 1
-console.log('BG paintedAction done!')
+console.log('BG         paintedAction   done!')
         } // paintedAction
     //
     //
@@ -52,7 +52,7 @@ console.log('BG paintedAction done!')
             () => completed.value, () => completedAction()
         ) // watch
         const completedAction = async() => {
-console.log('BG completedAction start!')
+console.log('BG         completedAction start!')
             canvasAnimation()
             await delay(130)
             clip1()
@@ -66,7 +66,7 @@ console.log('BG completedAction start!')
             leaveLayer()
             await delay(4000)
             rotate()
-console.log('BG completedAction done!')
+console.log('BG         completedAction done!')
         } // completedAction
     //
     // data
@@ -78,7 +78,8 @@ console.log('BG completedAction done!')
     //
     // this.$refs
     //
-        const title  = ref(),
+        const root   = ref(),
+              title  = ref(),
               shadow = ref(),
               face   = ref(),
               layer1 = ref(),
@@ -302,7 +303,7 @@ console.log('BG completedAction done!')
     //
         return{
             data,
-            title, shadow, face, layer1, layer2, layer3
+            root, title, shadow, face, layer1, layer2, layer3
         } // return
     } // setup
 } // default

@@ -65,7 +65,7 @@ export default {
             () => completed.value, () => completedAction()
         ) // watch
         const completedAction = async() => {
-console.log('index completedAction start!')
+console.log('index      completedAction     start!')
             document.getElementById('scrollArea').scrollTop = 0
             await delay(300)
             requestAnimationFrame(() => {
@@ -88,7 +88,7 @@ console.log('index completedAction start!')
                     stagger         : 0.1
                 })
             }) // requestAnimationFrame
-console.log('index completedAction done!')
+console.log('index      completedAction     done!')
         } // completedAction
     //
     // mounted
@@ -97,9 +97,9 @@ console.log('index completedAction done!')
             () => mountedAction()
         ) // onMounted
         const mountedAction = () => {
-console.log('index mountedAction start!')
+console.log('index      mountedAction   start!')
             document.getElementById('scrollArea').scrollTop = 0
-console.log('index mountedAction done!')
+console.log('index      mountedAction   done!')
         } // mountedAction
     //
     // methods
@@ -144,7 +144,7 @@ console.log('index mountedAction done!')
     // transition
     //
         const enter = (_, done) => {
-console.log('index enter start!')
+console.log('index      enter       start!')
             requestAnimationFrame(() => {
                 gsap.to('.section', {
                     duration        : 1,
@@ -165,11 +165,11 @@ console.log('index enter start!')
                     startAt         : {scaleX: 0, x: '-20px', opacity: 0},
                     stagger         : 0.1
                 })
-console.log('index enter done!')
+console.log('index      enter       done!')
             }) // requestAnimationFrame
         } // enter
         const leave = (_, done) => {
-console.log('index leave start!')
+console.log('index      leave       start!')
             requestAnimationFrame(() => {
                 gsap.to('.section', {
                     duration        : 0.7,
@@ -191,7 +191,7 @@ console.log('index leave start!')
                     stagger         : 0.1
                 })
             }) // requestAnimationFrame
-console.log('index leave done!')
+console.log('index      leave       done!')
         } // leave
     //
     // return

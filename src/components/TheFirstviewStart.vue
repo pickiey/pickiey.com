@@ -26,14 +26,14 @@ export default {
             () => loaded.value, () => loadedAction()
         ) // watch
         const loadedAction = async() => {
-console.log('FV_Start loadedAction start!')
+console.log('FV_Start   loadedAction    start!')
             await delay(3600)
             enter()
             await delay(200)
             effect()
             await delay(800)
             data.clickable = true
-console.log('FV_Start loadedAction done!')
+console.log('FV_Start   loadedAction    done!')
         } // loadedAction
     //
     // data
@@ -57,6 +57,7 @@ console.log('FV_Start loadedAction done!')
             data.off = true
         } // click
         const enter = () => {
+console.log('FV_Start   enter           start!')
             requestAnimationFrame(() => {
                 gsap.to('.TheFirstviewStart_Letter', {
                     duration    :1.5,
@@ -67,17 +68,22 @@ console.log('FV_Start loadedAction done!')
                     stagger     : 0.05
                 })
             }) // requestAnimationFrame
+console.log('FV_Start   enter           done!')
         } // enter
         const effect = () => {
+console.log('FV_Start   effect          start!')
             requestAnimationFrame(() => {
                 gsap.to('.TheFirstviewStart_Letter', {
                     duration    : 0.3,
                     color       : '#fff',
                     ease        : "expo.inOut",
-                    repeat      : -1,
-                    yoyo        : true,
-                    stagger     : 0.1
+                    stagger     : {
+                                    repeat  : -1,
+                                    yoyo    : true,
+                                    each    : 0.1
+                                  }
                 })
+console.log('FV_Start   effect          done!')
             }) // requestAnimationFrame
         } // effect
         const playMp3 = () => {
@@ -85,6 +91,7 @@ console.log('FV_Start loadedAction done!')
             if (!store.getters.isMobile) document.getElementById('bgm').play()
         } // playMp3
         const leave = () => {
+console.log('FV_Start   leave           start!')
             requestAnimationFrame(() => {
                 gsap.to('.TheFirstviewStart', {
                     duration    : 0.6,
@@ -92,6 +99,7 @@ console.log('FV_Start loadedAction done!')
                     scale       : 2,
                     ease        : "expo.inOut"
                 })
+console.log('FV_Start   leave           done!')
             }) // requestAnimationFrame
         } // leave
     //

@@ -81,14 +81,37 @@ export default {
             () => completed.value, () => completedAction()
         )
         const completedAction = async() => {
-console.log('Nav completedAction start!')
+console.log('Nav        completedAction     start!')
             await delay(500)
             enterSwitch()
             if (data.isMobile) return
             open()
             watchRoute()
-console.log('Nav completedAction done!')
+console.log('Nav        completedAction     done!')
         } // completedAction
+        const watchRoute = () => {
+console.log('Nav        watchRoute          start!')
+            watch(
+                () => route, () => {
+                    nextTick(() => {
+                        gsap.to('.TheNav_MenuContentListMark', {
+                            duration    : 0.7,
+                            opacity     : 0,
+                            scale       : 0,
+                            ease        : "expo.inOut"
+                        })
+                        gsap.to('.exact-active-link .TheNav_MenuContentListMark', {
+                            duration    : 1.5,
+                            opacity     : 1,
+                            scale       : 1,
+                            ease        : "elastic.out(1, 0.2)",
+                            delay       : 0.55
+                        })
+                    }) // nextTick()
+                }
+            ) // watch
+console.log('Nav        watchRoute          done!')
+        } // watchRoute
     //
     // data
     //
@@ -148,27 +171,6 @@ console.log('Nav completedAction done!')
             leaveMenu()
             data.opened = false
         } // close
-        const watchRoute = () => {
-            watch(
-                () => route, () => {
-                    nextTick(() => {
-                        gsap.to('.TheNav_MenuContentListMark', {
-                            duration    : 0.7,
-                            opacity     : 0,
-                            scale       : 0,
-                            ease        : "expo.inOut"
-                        })
-                        gsap.to('.exact-active-link .TheNav_MenuContentListMark', {
-                            duration    : 1.5,
-                            opacity     : 1,
-                            scale       : 1,
-                            ease        : "elastic.out(1, 0.2)",
-                            delay       : 0.55
-                        })
-                    }) // nextTick()
-                }
-            ) // watch
-        } // watchRoute
         const enterSwitch = () => {
             requestAnimationFrame(() => {
                 gsap.to(switchDummy1.value, {

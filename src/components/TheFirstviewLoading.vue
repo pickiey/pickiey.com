@@ -25,7 +25,7 @@ export default {
             () => loaded.value, () => loadedAction()
         ) // watch
         const loadedAction = async() => {
-console.log('FV_Loading loadedAction start!')
+console.log('FV_Loading loadedAction    start!')
             await delay(2000)
             bar()
             await delay(500)
@@ -35,7 +35,7 @@ console.log('FV_Loading loadedAction start!')
             changeColor()
             await delay(1000)
             data.off = true
-console.log('FV_Loading loadedAction done!')
+console.log('FV_Loading loadedAction    done!')
         } // loadedAction
     //
     // mounted
@@ -44,9 +44,9 @@ console.log('FV_Loading loadedAction done!')
             () => mountedAction()
         ) // onMounted
         const mountedAction = () => {
-console.log('FV_Loading mountedAction start!')
+console.log('FV_Loading mountedAction   start!')
             window.onload = () => loading()
-console.log('FV_Loading mountedAction done!')
+console.log('FV_Loading mountedAction   done!')
         } // mountedAction
     //
     // data

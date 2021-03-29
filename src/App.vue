@@ -44,10 +44,10 @@ export default {
             () => painted.value, () => paintedAction()
         ) // watch
         const paintedAction = () => {
-console.log('App paintedAction start!')
+console.log('App        paintedAction   start!')
                 document.getElementById('app').style.background     = '#191919'
                 document.getElementById('scrollArea').style.opacity = '1'
-console.log('App paintedAction done!')
+console.log('App        paintedAction   done!')
         } // paintedAction
     //
     // mounted
@@ -56,7 +56,7 @@ console.log('App paintedAction done!')
             () => mountedAction()
         ) // onMounted
         const mountedAction = () => {
-console.log('App mountedAction start!')
+console.log('App        mountedAction   start!')
             const userAgent = window.navigator.userAgent.toLowerCase()
             if (
                 userAgent.indexOf('msie')    !== -1 ||
@@ -65,7 +65,7 @@ console.log('App mountedAction start!')
             ) {
                 router.replace({ path: 'sorry' })
             }
-console.log('App mountedAction done!')
+console.log('App        mountedAction   done!')
         } // mountedAction
     //
     // methods
