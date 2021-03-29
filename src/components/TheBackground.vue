@@ -32,6 +32,36 @@ export default {
         const painted   = computed( () => store.getters.painted ),
               completed = computed( () => store.getters.completed )
     //
+    // watch
+    //
+        watch(
+            () => painted.value,   () => paintedAction(),
+            () => completed.value, () => completedAction()
+        ) // watch
+        const paintedAction = () => {
+            document.getElementById('app').style.opacity = 1
+            layer1.value.style.opacity = 1
+            layer2.value.style.opacity = 1
+            layer3.value.style.opacity = 1
+console.log('BG paintedAction done!')
+        } // paintedAction
+        const completedAction = async() => {
+            canvasAnimation()
+            await delay(130)
+            clip1()
+            await delay(130)
+            clip2()
+            await delay(130)
+            clip3()
+            await delay(200)
+            spout()
+            await delay(1000)
+            leaveLayer()
+            await delay(4000)
+            rotate()
+console.log('BG completedAction done!')
+        } // completedAction
+    //
     // data
     //
         const data = reactive({
@@ -47,13 +77,6 @@ export default {
               layer1 = ref(),
               layer2 = ref(),
               layer3 = ref()
-    //
-    // watch
-    //
-        watch(
-            () => painted,   () => paintedAction(),
-            () => completed, () => completedAction()
-        ) // watch
     //
     // methods
     //
@@ -267,27 +290,6 @@ export default {
             const particle = new Particles()
             particle.init()
         }
-        const paintedAction = () => {
-            document.getElementById('app').style.opacity = 1
-            layer1.value.style.opacity = 1
-            layer2.value.style.opacity = 1
-            layer3.value.style.opacity = 1
-        } // paintedAction
-        const completedAction = async() => {
-            canvasAnimation()
-            await delay(130)
-            clip1()
-            await delay(130)
-            clip2()
-            await delay(130)
-            clip3()
-            await delay(200)
-            spout()
-            await delay(1000)
-            leaveLayer()
-            await delay(4000)
-            rotate()
-        } // completedAction
     //
     // return
     //

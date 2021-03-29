@@ -1,5 +1,5 @@
 <template lang="pug">
-.TheFirstview(v-if='!killed')
+.TheFirstview(v-if='!killed.value')
     TheFirstviewOpening
     TheFirstviewLoading
     TheFirstviewStart

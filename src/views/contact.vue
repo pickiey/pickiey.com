@@ -44,6 +44,68 @@ export default {
     //
         const completed = computed( () => store.getters.completed )
     //
+    // watch
+    //
+        watch(
+            () => completed.value, () => completedAction()
+        ) // watch
+        const completedAction = async() => {
+            document.getElementById('scrollArea').scrollTop = 0
+            requestAnimationFrame(() => {
+                gsap.to('.blink', {
+                    duration        : 4,
+                    opacity         : 1,
+                    ease            : "elastic.out(0.8, 0.3)"
+                })
+                gsap.to('.blink', {
+                    duration        : 0.025,
+                    color           : '#555',
+                    startAt         : {color: '#fff'},
+                    ease            : "expo.out",
+                    repeat          : 41,
+                    yoyo            : true,
+                    repeatDelay     : 0.025
+                })
+                gsap.to('.underline', {
+                    duration        : 3,
+                    scaleX          : 1,
+                    ease            : "elastic.out(1, 0.3)",
+                    delay           : 1
+                })
+                gsap.to('.section', {
+                    duration        : 5,
+                    y               : 0,
+                    opacity         : 1,
+                    ease            : "elastic.out(1, 0.3)",
+                    startAt         : {y: '40px', opacity: 0},
+                    delay           : 0.2,
+                    stagger         : 0.1
+                })
+                gsap.to('.separator', {
+                    duration        : 5,
+                    scaleX          : 1,
+                    x               : 0,
+                    opacity         : 1,
+                    transformOrigin : 'left center',
+                    ease            : "elastic.out(1, 0.3)",
+                    startAt         : {scaleX: 0, x: '-20px', opacity: 0},
+                    delay           : 0.2,
+                    duration        : 0.1
+                  })
+              }) // requestAnimationFrame
+console.log('contact completedAction done!')
+        } // completedAction
+    //
+    // mounted
+    //
+        onMounted(
+            () => mountedAction()
+        ) // onMounted
+        const mountedAction = () => {
+            document.getElementById('scrollArea').scrollTop = 0
+console.log('contact mountedAction done!')
+        } // mountedAction
+    //
     // data
     //
         const data = reactive({
@@ -52,18 +114,6 @@ export default {
             user    : 'hello',
             domain  : 'pickiey.com'
         })
-    //
-    // watch
-    //
-        watch(
-            () => completed, () => completedAction()
-        ) // watch
-    //
-    // mounted
-    //
-        onMounted(
-            () => mountedAction()
-        ) // onMounted
     //
     // transition
     //
@@ -143,54 +193,6 @@ export default {
                 })
             }) // requestAnimationFrame
         } // leave
-        const completedAction = async() => {
-            document.getElementById('scrollArea').scrollTop = 0
-            requestAnimationFrame(() => {
-                gsap.to('.blink', {
-                    duration        : 4,
-                    opacity         : 1,
-                    ease            : "elastic.out(0.8, 0.3)"
-                })
-                gsap.to('.blink', {
-                    duration        : 0.025,
-                    color           : '#555',
-                    startAt         : {color: '#fff'},
-                    ease            : "expo.out",
-                    repeat          : 41,
-                    yoyo            : true,
-                    repeatDelay     : 0.025
-                })
-                gsap.to('.underline', {
-                    duration        : 3,
-                    scaleX          : 1,
-                    ease            : "elastic.out(1, 0.3)",
-                    delay           : 1
-                })
-                gsap.to('.section', {
-                    duration        : 5,
-                    y               : 0,
-                    opacity         : 1,
-                    ease            : "elastic.out(1, 0.3)",
-                    startAt         : {y: '40px', opacity: 0},
-                    delay           : 0.2,
-                    stagger         : 0.1
-                })
-                gsap.to('.separator', {
-                    duration        : 5,
-                    scaleX          : 1,
-                    x               : 0,
-                    opacity         : 1,
-                    transformOrigin : 'left center',
-                    ease            : "elastic.out(1, 0.3)",
-                    startAt         : {scaleX: 0, x: '-20px', opacity: 0},
-                    delay           : 0.2,
-                    duration        : 0.1
-                  })
-              }) // requestAnimationFrame
-        } // completedAction
-        const mountedAction = () => {
-            document.getElementById('scrollArea').scrollTop = 0
-        } // mountedAction
     //
     // return
     //

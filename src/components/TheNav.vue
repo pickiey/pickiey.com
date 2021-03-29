@@ -71,6 +71,20 @@ export default {
     //
         const completed = computed( () => store.getters.completed )
     //
+    // watch
+    //
+        watch(
+            () => completed.value, () => completedAction()
+        )
+        const completedAction = async() => {
+            await delay(500)
+            enterSwitch()
+            if (data.isMobile) return
+            open()
+            watchRoute()
+console.log('Nav completedAction done!')
+        } // completedAction
+    //
     // data
     //
         const data = reactive({
@@ -101,12 +115,6 @@ export default {
               border1       = ref(),
               border2       = ref(),
               border3       = ref()
-    //
-    // watch
-    //
-        watch(
-            () => completed, () => completedAction()
-        )
     //
     // methods
     //
@@ -428,13 +436,6 @@ export default {
                 })
             }) //requestAnimationFrame
         } // closeMenu
-        const completedAction = async() => {
-            await delay(500)
-            enterSwitch()
-            if (data.isMobile) return
-            open()
-            watchRoute()
-        } // completedAction
     //
     // return
     //

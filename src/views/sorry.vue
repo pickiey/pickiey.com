@@ -19,9 +19,6 @@ export default {
         onMounted(
             () => mountedAction()
         ) // onMounted
-    //
-    // methods
-    //
         const mountedAction = () => {
             requestAnimationFrame(() => {
                 gsap.to(sorry.value, {
@@ -32,6 +29,7 @@ export default {
                     ease        : "expo.inOut"
                 })
             }) // requestAnimationFrame
+console.log('sorry mountedAction done!')
         } // mountedAction
     //
     // return

@@ -84,7 +84,7 @@ transition(appear:false, v-on:enter="enter", v-on:leave="leave")
 </template>
 
 <script>
-import { computed, onMounted, onMounted, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
 import { gsap } from 'gsap'
 
@@ -99,37 +99,11 @@ export default {
     //
         const completed = computed( () => store.getters.completed )
     //
-    // data
-    //
-        const data = reactive({
-            src : '/assets/image/thumbnail.jpg',
-            url : url
-        })
-    //
-    // this.$refs
-    //
-        const thumb = ref()
-    //
     // watch
     //
         watch(
-            () => completed, () => completedAction()
+            () => completed.value, () => completedAction()
         )
-    //
-    // mounted
-    //
-        onMounted(
-            () => mountedAction()
-        ) // onMounted
-    //
-    // methods
-    //
-        const delay = (ms) => new Promise(_ => setTimeout(_, ms))
-        const imageOnLoad = (src, func) => {
-            const img = new Image()
-            img.onload = () => func()
-            img.src = src
-        }
         const completedAction = async() => {
             document.getElementById('scrollArea').scrollTop = 0
             await delay(300)
@@ -155,7 +129,14 @@ export default {
                     stagger         : 0.1
                 })
             }) // requestAnimationFrame
+console.log('about completedAction done!')
         } // completedAction
+    //
+    // mounted
+    //
+        onMounted(
+            () => mountedAction()
+        ) // onMounted
         const mountedAction = () => {
             document.getElementById('scrollArea').scrollTop = 0
             imageOnLoad(this.src, () => {
@@ -198,7 +179,28 @@ export default {
                 requestAnimationFrame(loop)
             } // loop
             loop()
+console.log('about mountedAction done!')
         } // mountedAction
+    //
+    // data
+    //
+        const data = reactive({
+            src : '/assets/image/thumbnail.jpg',
+            url : url
+        })
+    //
+    // this.$refs
+    //
+        const thumb = ref()
+    //
+    // methods
+    //
+        const delay = (ms) => new Promise(_ => setTimeout(_, ms))
+        const imageOnLoad = (src, func) => {
+            const img = new Image()
+            img.onload = () => func()
+            img.src = src
+        }
     //
     // transition
     //

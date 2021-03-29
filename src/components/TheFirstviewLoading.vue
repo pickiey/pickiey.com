@@ -22,14 +22,30 @@ export default {
     // watch
     //
         watch(
-            () => loaded, () => loadedAction()
+            () => loaded.value, () => loadedAction()
         ) // watch
+        const loadedAction = async() => {
+            await delay(2000)
+            bar()
+            await delay(500)
+            round()
+            await delay(700)
+            explosion()
+            changeColor()
+            await delay(1000)
+            data.off = true
+console.log('FV_Loading loadedAction done!')
+        } // loadedAction
     //
     // mounted
     //
         onMounted(
             () => mountedAction()
         ) // onMounted
+        const mountedAction = () => {
+            window.onload = () => loading()
+console.log('FV_Loading mountedAction done!')
+        } // mountedAction
     //
     // data
     //
@@ -44,20 +60,6 @@ export default {
     // methods
     //
         const delay = (ms) => new Promise(_ => setTimeout(_, ms))
-        const loadedAction = async() => {
-            await delay(2000)
-            bar()
-            await delay(500)
-            round()
-            await delay(700)
-            explosion()
-            changeColor()
-            await delay(1000)
-            data.off = true
-        } // loadedAction
-        const mountedAction = () => {
-            window.onload = () => loading()
-        } // mountedAction
         const tl = new gsap.timeline()
         const loading = () => {
             tl.repeat(-1)

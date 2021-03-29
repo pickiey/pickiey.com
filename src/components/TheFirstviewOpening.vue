@@ -57,8 +57,30 @@ export default {
     // watch
     //
         watch(
-            () => started, () => startedAction()
+            () => started.value, () => startedAction()
         ) // watch
+        const startedAction = async() => {
+            dummy()
+            flash()
+            await delay(900)
+            horizontal()
+            await delay(300)
+            data.listInit = data.listNormal
+            await delay(100)
+            enter()
+            await delay(700)
+            data.offDummy = true
+            face.value.style.background = '#0f0f0f'
+            paint()
+            await delay(700)
+            overf()
+            await delay(1400)
+            complete()
+            clip()
+            await delay(1300)
+            kill()
+console.log('FV_Opening startedAction done!')
+        } // startedAction
     //
     // data
     //
@@ -103,27 +125,6 @@ export default {
     // methods
     //
         const delay = (ms) => new Promise(_ => setTimeout(_, ms))
-        const startedAction = async() => {
-            dummy()
-            flash()
-            await delay(900)
-            horizontal()
-            await delay(300)
-            data.listInit = data.listNormal
-            await delay(100)
-            enter()
-            await delay(700)
-            data.offDummy = true
-            face.value.style.background = '#0f0f0f'
-            paint()
-            await delay(700)
-            overf()
-            await delay(1400)
-            complete()
-            clip()
-            await delay(1300)
-            kill()
-        } // startedAction
         const dummy = () => {
             requestAnimationFrame(() => {
                 gsap('.TheFirstviewOpening_Dummy1', {
@@ -213,7 +214,7 @@ export default {
         } // horizontal
         const enter = () => {
             requestAnimationFrame(() => {
-                TweenMax.to('.TheFirstviewOpening_Letter', {
+                gsap.to('.TheFirstviewOpening_Letter', {
                     duration    : 1.4,
                     opacity     : 1,
                     ease        : "rough({strength: 3, points: 20, taper: out, randomize: false, clamp: true})"

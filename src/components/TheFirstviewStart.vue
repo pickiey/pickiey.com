@@ -20,6 +20,21 @@ export default {
     //
         const loaded = computed( () => store.getters.loaded )
     //
+    // watch
+    //
+        watch(
+            () => loaded.value, () => loadedAction()
+        ) // watch
+        const loadedAction = async() => {
+            await delay(3600)
+            enter()
+            await delay(200)
+            effect()
+            await delay(800)
+            data.clickable = true
+console.log('FV_Start loadedAction done!')
+        } // loadedAction
+    //
     // data
     //
         const data = reactive({
@@ -28,23 +43,9 @@ export default {
 
         }) // data
     //
-    // watch
-    //
-        watch(
-            () => loaded, () => loadedAction()
-        ) // watch
-    //
     // methods
     //
         const delay = (ms) => new Promise(_ => setTimeout(_, ms))
-        const loadedAction = async() => {
-            await delay(3600)
-            enter()
-            await delay(200)
-            effect()
-            await delay(800)
-            data.clickable = true
-        } // loadedAction
         const click = async() => {
             if (!data.clickable) return
             data.clickable = false
