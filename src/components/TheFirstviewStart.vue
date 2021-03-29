@@ -26,6 +26,7 @@ export default {
             () => loaded.value, () => loadedAction()
         ) // watch
         const loadedAction = async() => {
+console.log('FV_Start loadedAction start!')
             await delay(3600)
             enter()
             await delay(200)
@@ -106,7 +107,7 @@ console.log('FV_Start loadedAction done!')
 
 <style lang="stylus" scoped>
 @import "../assets/stylus/mixins.styl"
-
+@import "../assets/stylus/variables.styl"
 .TheFirstviewStart
     display                         flex
     justify-content                 center

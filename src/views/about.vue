@@ -138,6 +138,7 @@ console.log('about completedAction done!')
             () => mountedAction()
         ) // onMounted
         const mountedAction = () => {
+console.log('about mountedAction start!')
             document.getElementById('scrollArea').scrollTop = 0
             imageOnLoad(this.src, () => {
                 requestAnimationFrame(() => {
@@ -178,8 +179,8 @@ console.log('about completedAction done!')
                 noise(ctx)
                 requestAnimationFrame(loop)
             } // loop
-            loop()
 console.log('about mountedAction done!')
+            loop()
         } // mountedAction
     //
     // data
@@ -260,8 +261,8 @@ console.log('about mountedAction done!')
 </script>
 
 <style lang="stylus" scoped>
-@import "assets/stylus/mixins.styl"
-@import "assets/stylus/variables.styl"
+@import "../assets/stylus/mixins.styl"
+@import "../assets/stylus/variables.styl"
 .about
     .section
         opacity                     0

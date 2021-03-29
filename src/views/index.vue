@@ -6,8 +6,8 @@ transition(appear:false, v-on:enter="enter", v-on:leave="leave")
             .helloJa                        はろーわーるど！
         .separator
         .section
-            .nameEng                        Soichiro Nitta
-//-            h1.nameJa                       新田 聡一郎 ({{ age }})
+            .nameEng                        pickiey
+            h1.nameJa                       pickiey age!!!!!!!!!!!
         .separator
         .section
             .subTitle                       01. Design x Develop
@@ -56,8 +56,8 @@ export default {
     //
     // computed
     //
-        const completed = computed( () => store.getters.completed ),
-              age       = computed( () => getAge() )
+        const completed = computed( () => store.getters.completed )//,
+              //age       = computed( () => getAge() )
     //
     // watch
     //
@@ -65,6 +65,7 @@ export default {
             () => completed.value, () => completedAction()
         ) // watch
         const completedAction = async() => {
+console.log('index completedAction start!')
             document.getElementById('scrollArea').scrollTop = 0
             await delay(300)
             requestAnimationFrame(() => {
@@ -96,6 +97,7 @@ console.log('index completedAction done!')
             () => mountedAction()
         ) // onMounted
         const mountedAction = () => {
+console.log('index mountedAction start!')
             document.getElementById('scrollArea').scrollTop = 0
 console.log('index mountedAction done!')
         } // mountedAction
@@ -142,6 +144,7 @@ console.log('index mountedAction done!')
     // transition
     //
         const enter = (_, done) => {
+console.log('index enter start!')
             requestAnimationFrame(() => {
                 gsap.to('.section', {
                     duration        : 1,
@@ -162,9 +165,11 @@ console.log('index mountedAction done!')
                     startAt         : {scaleX: 0, x: '-20px', opacity: 0},
                     stagger         : 0.1
                 })
+console.log('index enter done!')
             }) // requestAnimationFrame
         } // enter
         const leave = (_, done) => {
+console.log('index leave start!')
             requestAnimationFrame(() => {
                 gsap.to('.section', {
                     duration        : 0.7,
@@ -186,12 +191,13 @@ console.log('index mountedAction done!')
                     stagger         : 0.1
                 })
             }) // requestAnimationFrame
+console.log('index leave done!')
         } // leave
     //
     // return
     //
         return {
-            age,
+            //age,
             enter, leave
         }
     } // setup

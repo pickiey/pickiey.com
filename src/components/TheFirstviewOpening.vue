@@ -60,6 +60,7 @@ export default {
             () => started.value, () => startedAction()
         ) // watch
         const startedAction = async() => {
+console.log('FV_Opening startedAction start!')
             dummy()
             flash()
             await delay(900)
@@ -88,32 +89,42 @@ console.log('FV_Opening startedAction done!')
             sitename    : 'pickiey.portfolio',
             offDummy    : false,
             listInit    : [
-                            { id: 12, value: 'o' },
-                            { id: 10, value: 'i' },
-                            { id:  8, value: 'd' },
-                            { id:  6, value: 'u' },
-                            { id:  4, value: 't' },
-                            { id:  2, value: 'S' },
-                            { id:  1, value: '.' },
-                            { id:  3, value: 'a' },
-                            { id:  5, value: 't' },
-                            { id:  7, value: 't' },
+                            { id: 16, value: 'o' },
+                            { id: 14, value: 'i' },
+                            { id: 12, value: 'l' },
+                            { id: 10, value: 'o' },
+                            { id:  8, value: 'f' },
+                            { id:  6, value: 't' },
+                            { id:  4, value: 'r' },
+                            { id:  2, value: 'o' },
+                            { id:  1, value: 'p' },
+                            { id:  3, value: '.' },
+                            { id:  5, value: 'y' },
+                            { id:  7, value: 'e' },
                             { id:  9, value: 'i' },
-                            { id: 11, value: 'N' }
+                            { id: 11, value: 'k' },
+                            { id: 13, value: 'c' },
+                            { id: 15, value: 'i' },
+                            { id: 17, value: 'p' }
                           ],
             listNormal  : [
-                            { id: 11, value: 'N' },
+                            { id: 17, value: 'p' },
+                            { id: 15, value: 'i' },
+                            { id: 13, value: 'c' },
+                            { id: 11, value: 'k' },
                             { id:  9, value: 'i' },
-                            { id:  7, value: 't' },
-                            { id:  5, value: 't' },
-                            { id:  3, value: 'a' },
-                            { id:  1, value: '.' },
-                            { id:  2, value: 'S' },
-                            { id:  4, value: 't' },
-                            { id:  6, value: 'u' },
-                            { id:  8, value: 'd' },
-                            { id: 10, value: 'i' },
-                            { id: 12, value: 'o' }
+                            { id:  7, value: 'e' },
+                            { id:  5, value: 'y' },
+                            { id:  3, value: '.' },
+                            { id:  1, value: 'p' },
+                            { id:  2, value: 'o' },
+                            { id:  4, value: 'r' },
+                            { id:  6, value: 't' },
+                            { id:  8, value: 'f' },
+                            { id: 10, value: 'o' },
+                            { id: 12, value: 'l' },
+                            { id: 14, value: 'i' },
+                            { id: 16, value: 'o' }
                           ]
         }) // data
     //
@@ -127,26 +138,26 @@ console.log('FV_Opening startedAction done!')
         const delay = (ms) => new Promise(_ => setTimeout(_, ms))
         const dummy = () => {
             requestAnimationFrame(() => {
-                gsap('.TheFirstviewOpening_Dummy1', {
+                gsap.to('.TheFirstviewOpening_Dummy1', {
                     duration    : 0.3,
                     y           : '-100%',
                     ease        : "expo.inOut",
                     stagger     : 0.2
                 })
-                gsap('.TheFirstviewOpening_Dummy2', {
+                gsap.to('.TheFirstviewOpening_Dummy2', {
                     duration    : 0.3,
                     y           : '100%',
                     ease        : "expo.inOut",
                     stagger     : 0.2
                 })
-                gsap('.TheFirstviewOpening_Dummy3', {
+                gsap.to('.TheFirstviewOpening_Dummy3', {
                     duration    : 0.3,
                     y           : '-100%',
                     ease        : "expo.inOut",
                     delay       : 0.4,
                     stagger     : 0.2
                 })
-                gsap('.TheFirstviewOpening_Dummy4', {
+                gsap.to('.TheFirstviewOpening_Dummy4', {
                     duration    : 0.3,
                     y           : '100%',
                     ease        : "expo.inOut",
@@ -244,7 +255,6 @@ console.log('FV_Opening startedAction done!')
 <style lang="stylus" scoped>
 @import "../assets/stylus/mixins.styl"
 @import "../assets/stylus/variables.styl"
-
 .TheFirstviewOpening
     position                        absolute
     top                             0

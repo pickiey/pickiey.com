@@ -36,16 +36,23 @@ export default {
     //
         watch(
             () => painted.value,   () => paintedAction(),
-            () => completed.value, () => completedAction()
         ) // watch
         const paintedAction = () => {
+console.log('BG paintedAction start!')
             document.getElementById('app').style.opacity = 1
             layer1.value.style.opacity = 1
             layer2.value.style.opacity = 1
             layer3.value.style.opacity = 1
 console.log('BG paintedAction done!')
         } // paintedAction
+    //
+    //
+    //
+        watch(
+            () => completed.value, () => completedAction()
+        ) // watch
         const completedAction = async() => {
+console.log('BG completedAction start!')
             canvasAnimation()
             await delay(130)
             clip1()
@@ -304,7 +311,6 @@ console.log('BG completedAction done!')
 <style lang="stylus" scoped>
 @import "../assets/stylus/mixins.styl"
 @import "../assets/stylus/variables.styl"
-
 .TheBg
     display                             flex
     justify-content                     center

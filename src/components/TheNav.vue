@@ -63,6 +63,10 @@ import { gsap }     from 'gsap'
 export default {
     setup() {
     //
+    // route
+    //
+        const route = useRoute()
+    //
     // store
     //
         const store = useStore()
@@ -77,6 +81,7 @@ export default {
             () => completed.value, () => completedAction()
         )
         const completedAction = async() => {
+console.log('Nav completedAction start!')
             await delay(500)
             enterSwitch()
             if (data.isMobile) return
@@ -145,7 +150,7 @@ console.log('Nav completedAction done!')
         } // close
         const watchRoute = () => {
             watch(
-                () => useRoute(), () => {
+                () => route, () => {
                     nextTick(() => {
                         gsap.to('.TheNav_MenuContentListMark', {
                             duration    : 0.7,
@@ -453,7 +458,6 @@ console.log('Nav completedAction done!')
 <style lang="stylus" scoped>
 @import "../assets/stylus/mixins.styl"
 @import "../assets/stylus/variables.styl"
-
 .TheNav
     &_Menu
         display                         none

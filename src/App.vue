@@ -8,19 +8,6 @@
     TheAudio
 </template>
 
-<!--
-.default
-    TheBackground
-    #scrollArea
-        router-view
-    TheNav
-    TheFirstview
-    TheAudio
--->
-
-
-
-
 <script>
 import { computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
@@ -54,22 +41,22 @@ export default {
     // watch
     //
         watch(
-            () => painted, () => paintedAction()
+            () => painted.value, () => paintedAction()
         ) // watch
+        const paintedAction = () => {
+console.log('App paintedAction start!')
+                document.getElementById('app').style.background     = '#191919'
+                document.getElementById('scrollArea').style.opacity = '1'
+console.log('App paintedAction done!')
+        } // paintedAction
     //
     // mounted
     //
         onMounted(
             () => mountedAction()
         ) // onMounted
-    //
-    // methods
-    //
-        const paintedAction = () => {
-                document.getElementById('app').style.background     = '#191919'
-                document.getElementById('scrollArea').style.opacity = '1'
-        } // paintedAction
         const mountedAction = () => {
+console.log('App mountedAction start!')
             const userAgent = window.navigator.userAgent.toLowerCase()
             if (
                 userAgent.indexOf('msie')    !== -1 ||
@@ -78,18 +65,21 @@ export default {
             ) {
                 router.replace({ path: 'sorry' })
             }
+console.log('App mountedAction done!')
         } // mountedAction
+    //
+    // methods
+    //
     } // setup
 } // default
 
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 @import "assets/stylus/mixins.styl"
+@import "assets/stylus/variables.styl"
 
 .default
-    -webkit-font-smoothing              antialiased
-    -moz-osx-font-smoothing             grayscale
     position                            relative
     margin                              10px
     width                               calc(100% - 20px)

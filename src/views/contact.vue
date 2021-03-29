@@ -204,18 +204,6 @@ console.log('contact mountedAction done!')
 } // default
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <style lang="stylus" scoped>
 @import "../assets/stylus/mixins.styl"
 @import "../assets/stylus/variables.styl"
