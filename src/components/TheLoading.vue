@@ -1,32 +1,32 @@
 <template lang="pug">
-.TheLoading(v-if='data.loading')            loading
+.TheLoading(v-if='loading')            loading
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
     setup() {
     //
     // data
     //
-        const data = reactive({
-            loading : false
-        }) // data
+        let loading = ref(false)
     //
     // methods
     //
         const start = () => {
-            data.loading = true
-console.log('FV_start   start!')
+            loading = true
+console.log('Loading        start!')
         }
         const finish = () => {
-            data.loading = false
-console.log('FV_start   finish')
+            loading = false
+console.log('Loading        finish')
         }
     //
     // return
     //
         return{
-            data
+            loading
         } // return
     } // setup
 } // default

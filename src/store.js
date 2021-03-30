@@ -8,7 +8,7 @@ const state = {
     painted   : false,
     completed : false,
     killed    : false,
-    loaded    : false
+    loaded    : false,
 }
 
 const getters = {

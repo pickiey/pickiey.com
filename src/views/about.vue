@@ -2,91 +2,98 @@
 transition(appear:false, v-on:enter="enter", v-on:leave="leave")
     .about
         .section
-            .helloEng                   I'm a Web Designer
-            .helloJa                    開発もイケちゃうデザイナー
+            .helloEng                                           I'm a Web Designer
+            .helloJa                                            開発もイケちゃうデザイナー
         .separator
         .section
             .intro
-                |                       2012年、受託会社のインターンを経て独立。
-                |                       デザインとエンジニアリングを両立してきました。
-                |                       デザインをデータにおこすことはせず、コードを書きながらデザインしていきます。
-                |                       制作の全行程を１人の人間が担うことで、細かなインタラクティブや、
-                |                       高い品質を提供することができます。
-            .thumbimg(:src='data.src' ref='thumb')
-              canvas#canvasThumb
-        .separator
-        .section
-            .subTitle 01. Skillset
-            ul.skillset
-                li HTML5
-                    span  /
-                    |  Pug
-                li CSS3
-                    span  /
-                    |  Stylus
-                li JavaScript
-                    span  /
-                    |  Vue3
-                    span  /
-                    |  Node
-                li GSAP(TweenMax)
-                    span  /
-                    |  CSS Animation
-                li ruby
-                    span  /
-                    |  Haskell
-                li Netlify
-                    span  /
-                    |  Firebase
-                li Git
-                    span  /
-                    |  GitHub
-                li Terminal
-                    span  /
-                    |  Zsh
-                    span  /
-                    |  tmux
-                    span  /
-                    |  Vim
-                li Sketch
-                    span  /
-                    |  Photoshop
-                    span  /
-                    |  Illustrator
-                li etc...
-        .separator
-        .section
-            .subTitle 02. Welcome
-            .welcome お仕事募集中😻
+                |                                               2020年10月に､新卒から努めていた自動車部品製造メーカーをやめて
+                |                                               Webデザインとフロントエンドの勉強しつつ､お仕事探しをしています｡
                 br
-                router-link(to='/contact') コチラ
-                | からお問い合わせください！
+                |                                               このポートフォリオサイトでは､
+                |                                               GSAPによるトランジションアニメーションと
+                |                                               Vueによるシングルページアプリケーション化を実装しています｡
+                br
+                |                                               今後はWEBGLの理解を深めてシェーダーを書いて
+                |                                               よりインパクトのあるサイトデザインを実現できるようにしていきたいです｡
+                br
+                br
+            .thumbimg(:src='src' ref='thumb')
+                canvas#canvasThumb
         .separator
         .section
-            .subTitle 03. Social
+            .subTitle                                           01. Skillset
+            ul.skillset
+                li                                              HTML5
+                    span                                        /
+                    |                                           Pug
+                li                                              CSS3
+                    span                                        /
+                    |                                           Stylus
+                li                                              JavaScript
+                    span                                        /
+                    |                                           Vue3
+                    span                                        /
+                    |                                           Node
+                li                                              GSAP(TweenMax)
+                    span                                        /
+                    |                                           CSS Animation
+                li                                              ruby
+                    span                                        /
+                    |                                           Haskell
+                li                                              Netlify
+                    span                                        /
+                    |                                           Firebase
+                li Git
+                    span                                        /
+                    |                                           GitHub
+                li                                              Terminal
+                    span                                        /
+                    |                                           Zsh
+                    span                                        /
+                    |                                           tmux
+                    span                                        /
+                    |                                           Vim
+                li                                              Sketch
+                    span                                        /
+                    |                                           Photoshop
+                    span                                        /
+                    |                                           Illustrator
+                li                                              etc...
+        .separator
+        .section
+            .subTitle                                           02. Welcome
+            .welcome                                            お仕事募集中😻
+                br
+                router-link(to='/contact')                      コチラ
+                |                                               からお問い合わせください！
+        .separator
+        .section
+            .subTitle                                           03. Social
             .social
                 a(
                   :href='url.twitter',
                   target='_blank'
-                ) Twitter
+                )                                               Twitter
                 a(
                   :href='url.instagram',
                   target='_blank'
-                ) Instagram
+                )                                               Instagram
                 a(
                   :href='url.facebook',
                   target='_blank'
-                ) Facebook
+                )                                               Facebook
                 a(
                   :href='url.github',
                   target='_blank'
-                ) GitHub
+                )                                               GitHub
 </template>
 
 <script>
-import { computed, onMounted, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { gsap } from 'gsap'
+import configJson from '../assets/data/config.json'
 
 export default {
     setup() {
@@ -140,7 +147,7 @@ console.log('about completedAction done!')
         const mountedAction = () => {
 console.log('about mountedAction start!')
             document.getElementById('scrollArea').scrollTop = 0
-            imageOnLoad(this.src, () => {
+            imageOnLoad(src, () => {
                 requestAnimationFrame(() => {
                     gsap.to(thumb.value, {
                         duration    : 1.5,
@@ -151,13 +158,13 @@ console.log('about mountedAction start!')
             }) // imageOnLoad
             const canvas = document.getElementById('canvasThumb')
             const ctx = canvas.getContext('2d')
-            resize = () => {
+            const resize = () => {
                 canvas.width  = window.innerWidth
                 canvas.height = window.innerHeight
             }
             resize()
             window.onresize = resize
-            noise = (ctx) => {
+            const noise = (ctx) => {
                 const w = ctx.canvas.width
                 const h = ctx.canvas.height
                 const idata = ctx.createImageData(w, h)
@@ -185,10 +192,8 @@ console.log('about mountedAction done!')
     //
     // data
     //
-        const data = reactive({
-            src : '/assets/image/thumbnail.jpg',
-            url : url
-        })
+        const src = '/assets/image/thumbnail.jpg',
+              url = configJson.url
     //
     // this.$refs
     //
@@ -252,7 +257,7 @@ console.log('about mountedAction done!')
             }) // requestAnimationFrame
         } // leave
         return{
-            data,
+            src, url,
             thumb,
             enter, leave
         } // return

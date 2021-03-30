@@ -1,6 +1,6 @@
 <template lang="pug">
 .TheFirstviewOpening
-    .TheFirstviewOpening_Dummy(v-if='!data.offDummy')
+    .TheFirstviewOpening_Dummy(v-if='!offDummy')
         .TheFirstviewOpening_Dummy1.TheFirstviewOpening_DummyC
         .TheFirstviewOpening_Dummy1.TheFirstviewOpening_DummyB
         .TheFirstviewOpening_Dummy1.TheFirstviewOpening_DummyA
@@ -23,7 +23,7 @@
                         :key        = 'letter.id'
                     )
                         span                                                                        {{ letter.value }}
-                .TheFirstviewOpening_Over(ref='over')                                               {{ data.sitename }}
+                .TheFirstviewOpening_Over(ref='over')                                               {{ sitename }}
                 .TheFirstviewOpening_HorizontalTop.TheFirstviewOpening_HorizontalTop1
                 .TheFirstviewOpening_HorizontalTop.TheFirstviewOpening_HorizontalTop2
                 .TheFirstviewOpening_HorizontalTop.TheFirstviewOpening_HorizontalTop3
@@ -39,6 +39,7 @@
 import { computed, reactive, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { gsap }     from 'gsap'
+import configJson from '../assets/data/config.json'
 
 export default {
     setup() {
@@ -70,7 +71,7 @@ console.log('FV_Opening startedAction   start!')
             await delay(100)
             enter()
             await delay(700)
-            data.offDummy = true
+            offDummy.value = true
             face.value.style.background = '#0f0f0f'
             paint()
             await delay(700)
@@ -85,9 +86,8 @@ console.log('FV_Opening startedAction   done!')
     //
     // data
     //
+        const sitename = configJson.siteinfo.sitename
         const data = reactive({
-            sitename    : 'pickiey.portfolio',
-            offDummy    : false,
             listInit    : [
                             { id: 16, value: 'o' },
                             { id: 14, value: 'i' },
@@ -130,8 +130,9 @@ console.log('FV_Opening startedAction   done!')
     //
     // this.$refs
     //
-        const face = ref(),
-              over = ref()
+        const offDummy = ref(false),
+              face     = ref(),
+              over     = ref()
     //
     // methods
     //
@@ -245,8 +246,8 @@ console.log('FV_Opening startedAction   done!')
     // return
     //
         return{
-            data,
-            face, over
+            data, sitename,
+            offDummy, face, over
         } // return
     } // setup
 } // default

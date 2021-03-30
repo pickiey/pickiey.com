@@ -1,10 +1,10 @@
 <template lang="pug">
-.TheFirstviewStart(v-if='!data.off' @click='click')
+.TheFirstviewStart(v-if='!off.value' @click='click')
     span.TheFirstviewStart_Letter( v-for='letter in "Click&Start!!"')           {{ letter }}
 </template>
 
 <script>
-import { computed, reactive, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { gsap }     from 'gsap'
 
@@ -32,29 +32,27 @@ console.log('FV_Start   loadedAction    start!')
             await delay(200)
             effect()
             await delay(800)
-            data.clickable = true
+            clickable = true
 console.log('FV_Start   loadedAction    done!')
         } // loadedAction
     //
     // data
     //
-        const data = reactive({
-            off       : false,
-            clickable : false
-
-        }) // data
+        const isMobile  = store.getters.isMobile,
+              off       = ref(false)
+        let   clickable = false
     //
     // methods
     //
         const delay = (ms) => new Promise(_ => setTimeout(_, ms))
         const click = async() => {
-            if (!data.clickable) return
-            data.clickable = false
+            if (!clickable) return
+            clickable = false
             playMp3()
             start()
             leave()
             await delay(600)
-            data.off = true
+            off.value = true
         } // click
         const enter = () => {
 console.log('FV_Start   enter           start!')
@@ -88,7 +86,7 @@ console.log('FV_Start   effect          done!')
         } // effect
         const playMp3 = () => {
             document.getElementById('sound').play()
-            if (!store.getters.isMobile) document.getElementById('bgm').play()
+            if (!isMobile) document.getElementById('bgm').play()
         } // playMp3
         const leave = () => {
 console.log('FV_Start   leave           start!')
@@ -106,7 +104,7 @@ console.log('FV_Start   leave           done!')
     // return
     //
         return{
-            data,
+            off,
             click
         } // return
     } // setup

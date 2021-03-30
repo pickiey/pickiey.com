@@ -11,8 +11,8 @@
                 ref='logo',
                 @click.native='close'
             )
-                .TheNav_MenuContentLogoShadow                            {{ data.sitename }}
-                .TheNav_MenuContentLogoOver(ref='over')                  {{ data.sitename }}
+                .TheNav_MenuContentLogoShadow                            {{ sitename }}
+                .TheNav_MenuContentLogoOver(ref='over')                  {{ sitename }}
             .TheNav_MenuContentList
                 router-link(
                     to='/',
@@ -26,7 +26,7 @@
                     @click.native='close'
                 )
                     .TheNav_MenuContentListEng                           ABOUT
-                    .TheNav_MenuContentListJa                            {{ data.author }}について
+                    .TheNav_MenuContentListJa                            {{ author }}について
                     .TheNav_MenuContentListMark
                 router-link(
                     to='/contact',
@@ -36,11 +36,11 @@
                     .TheNav_MenuContentListJa                            お問い合わせ
                     .TheNav_MenuContentListMark
                 .TheNav_MenuContentFooter(ref='footer')
-                .TheNav_MenuContentProduced(ref='produced')              Produced by {{ data.author }}.
+                .TheNav_MenuContentProduced(ref='produced')              Produced by {{ author }}.
     .TheNav_Switch(
         ref='navSwitch',
         @click='toggle',
-        v-show='data.isMobile'
+        v-show='isMobile'
     )
         .TheNav_SwitchDummy1(ref='switchDummy1')
         .TheNav_SwitchDummy2(ref='switchDummy2')
@@ -55,10 +55,11 @@
 
 
 <script>
-import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { gsap }     from 'gsap'
+import configJson from '../assets/data/config.json'
 
 export default {
     setup() {
@@ -81,16 +82,16 @@ export default {
             () => completed.value, () => completedAction()
         )
         const completedAction = async() => {
-console.log('Nav        completedAction     start!')
+console.log('Nav        completedAction start!')
             await delay(500)
             enterSwitch()
-            if (data.isMobile) return
+            if (isMobile) return
             open()
             watchRoute()
-console.log('Nav        completedAction     done!')
+console.log('Nav        completedAction done!')
         } // completedAction
         const watchRoute = () => {
-console.log('Nav        watchRoute          start!')
+console.log('Nav        watchRoute      start!')
             watch(
                 () => route, () => {
                     nextTick(() => {
@@ -110,18 +111,16 @@ console.log('Nav        watchRoute          start!')
                     }) // nextTick()
                 }
             ) // watch
-console.log('Nav        watchRoute          done!')
+console.log('Nav        watchRoute      done!')
         } // watchRoute
     //
     // data
     //
-        const data = reactive({
-            sitename : 'pickiey.portfolio',
-            author   : 'pickiey',
-            opened   : false,
-            progress : false,
-            isMobile : store.getters.isMobile
-        })
+        let   opened   = false,
+              progress = false
+        const isMobile = store.getters.isMobile,
+              author   = configJson.siteinfo.author,
+              sitename = configJson.siteinfo.sitename
     //
     // this.$refs
     //
@@ -148,28 +147,28 @@ console.log('Nav        watchRoute          done!')
     //
         const delay = (ms) => new Promise(_ => setTimeout(_, ms))
         const toggle = () => {
-            !data.opened ? open() : close()
+            !opened ? open() : close()
         } // toggle
         const open = async() => {
-            if (data.progress) return
-            data.progress = true
+            if (progress) return
+            progress = true
             openSwitch()
             enterMenu()
             openMenu()
             await delay(800)
-            data.progress = false
-            data.opened = true
+            progress = false
+            opened = true
         } // open
         const close = async() => {
-            if (!data.isMobile) return
-            if (data.progress) return
-            data.progress = true
+            if (!isMobile) return
+            if (progress) return
+            progress = true
             closeSwitch()
             closeMenu()
             await delay(700)
-            data.progress = false
+            progress = false
             leaveMenu()
-            data.opened = false
+            opened = false
         } // close
         const enterSwitch = () => {
             requestAnimationFrame(() => {
@@ -258,10 +257,10 @@ console.log('Nav        watchRoute          done!')
         } // openSwitch
         const openMenu = () => {
             requestAnimationFrame(() => {
-                const duration  = data.isMobile ? 0.7 : 1,
-                      delay2    = data.isMobile ? 0.1 : 0.12,
-                      delay3    = data.isMobile ? 0.2 : 0.24,
-                      delayFace = data.isMobile ? 0.3 : 0.36
+                const duration  = isMobile ? 0.7 : 1,
+                      delay2    = isMobile ? 0.1 : 0.12,
+                      delay3    = isMobile ? 0.2 : 0.24,
+                      delayFace = isMobile ? 0.3 : 0.36
                 gsap.to(menuDummy1.value, {
                     duration    : duration,
                     left        : 0,
@@ -447,7 +446,7 @@ console.log('Nav        watchRoute          done!')
     // return
     //
         return{
-            data,
+            isMobile, author, sitename,
             menu, menuDummy1, menuDummy2, menuDummy3, menuFace, logo, over, footer, produced,
             navSwitch, switchDummy1, switchDummy2, switchDummy3, switchFace, switchContent,
             border1, border2, border3,

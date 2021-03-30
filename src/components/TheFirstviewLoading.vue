@@ -1,10 +1,10 @@
 <template lang="pug">
-.TheFirstviewLoading(v-if='!data.off')
+.TheFirstviewLoading(v-if='!off')
     .TheFirstviewLoading_Gray(ref='gray')
 </template>
 
 <script>
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { gsap }     from 'gsap'
 
@@ -34,7 +34,7 @@ console.log('FV_Loading loadedAction    start!')
             explosion()
             changeColor()
             await delay(1000)
-            data.off = true
+            off.value = true
 console.log('FV_Loading loadedAction    done!')
         } // loadedAction
     //
@@ -51,9 +51,7 @@ console.log('FV_Loading mountedAction   done!')
     //
     // data
     //
-        const data = reactive({
-            off : false
-        }) // data
+        const off = ref(false)
     //
     // this.$refs
     //
@@ -130,7 +128,7 @@ console.log('FV_Loading mountedAction   done!')
     // return
     //
         return{
-            data,
+            off,
             gray
         } // return
     } // setup

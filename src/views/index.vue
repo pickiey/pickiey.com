@@ -6,17 +6,23 @@ transition(appear:false, v-on:enter="enter", v-on:leave="leave")
             .helloJa                        はろーわーるど！
         .separator
         .section
-            .nameEng                        pickiey
-            h1.nameJa                       pickiey age!!!!!!!!!!!
+            .nameEng                        {{ author }}
+            //- h1.nameJa                       {{ author }} age!!!!!!!!!!!
         .separator
         .section
-            .subTitle                       01. Design x Develop
+            .subTitle                       01. Info
             .intro
-                |                           1994年生まれ埼玉県在住、フリーランスのデザイナー兼デベロッパー。
-                |                           JavaScriptでのSPA開発、デザイン、2Dアニメーションが得意。
-                |                           服や靴はいつも同じものを何着もまとめ買い、食事は玄米食で添加物NG、
-                |                           トレーニングは毎日欠かしません！
-                |                           新海誠作品、BUMP OF CHICKEN、RADWIMPSが好き！😸
+                |                           1992年生まれ。
+                |                           新卒で入社した会社では生産技術職をしていました｡
+                br
+                |                           ヌルヌル動くWebサイトを見るたびに､
+                |                           WEB制作の仕事をしたいと思っていました｡
+                br
+                |                           キャリアチェンジするなら20代の内にと思い､
+                |                           20年10月に退職してから､
+                br
+                |                           フロント周りの勉強をしつつ､
+                |                           絶賛就活中です!!
                 br
                 br
                 router-link(to='/about')    もっと詳しく！
@@ -24,28 +30,25 @@ transition(appear:false, v-on:enter="enter", v-on:leave="leave")
         .section
             .subTitle                       02. History
             ul.history
-                li                          IQUE株式会社インターン@恵比寿
-                    .date                   Dec. 2012 ~
-                li                          東京成徳大学高等学校卒業
-                  .date                     Mar. 2013
-                li                          フリーとして独立、代理店と提携
-                  .date                     Apr. 2013 ~
-                li                          法人化、事件発生
-                  .date                     Nov. 2014 ~ Feb. 2015
-                li                          フリーランス@渋谷
-                  .date                     Mar. 2015 ~ Dec. 2017
-                li                          フリーランス@埼玉
-                  .date                     Jan. 2018 ~
-                li                          フリーランス@神戸
-                  .date                     Aug. 2018 ~
-                li                          フリーランス@埼玉
-                  .date                     June. 2019 ~
+                li                          名古屋工業大学 電気電子工学科 卒業
+                    .date                   2018.03
+                li                          自動車のとある部品の製造メーカーに入社､研修 @神戸
+                  .date                     2018.04 ~ 05
+                li                          生産技術職として工場配属 @豊田
+                  .date                     2018.05 ~ 10
+                li                          グループ会社の販売店へ販売応援 @山形
+                  .date                     2018.10 ~ 2018.12
+                li                          再び工場で生産技術 @豊田
+                  .date                     2019.01 ~ 2020.10
+                li                          Webデザイン､フロント周りの技術のキャッチアップと就活 @岐阜
+                  .date                     2020.11 ~
 </template>
 
 <script>
 import { computed, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
 import { gsap } from 'gsap'
+import configJson from '../assets/data/config.json'
 
 export default {
     setup() {
@@ -65,7 +68,7 @@ export default {
             () => completed.value, () => completedAction()
         ) // watch
         const completedAction = async() => {
-console.log('index      completedAction     start!')
+console.log('index      completedAction start!')
             document.getElementById('scrollArea').scrollTop = 0
             await delay(300)
             requestAnimationFrame(() => {
@@ -88,7 +91,7 @@ console.log('index      completedAction     start!')
                     stagger         : 0.1
                 })
             }) // requestAnimationFrame
-console.log('index      completedAction     done!')
+console.log('index      completedAction done!')
         } // completedAction
     //
     // mounted
@@ -101,6 +104,10 @@ console.log('index      mountedAction   start!')
             document.getElementById('scrollArea').scrollTop = 0
 console.log('index      mountedAction   done!')
         } // mountedAction
+    //
+    // data
+    //
+        const author = configJson.siteinfo.author
     //
     // methods
     //
@@ -198,6 +205,7 @@ console.log('index      leave       done!')
     //
         return {
             //age,
+            author,
             enter, leave
         }
     } // setup

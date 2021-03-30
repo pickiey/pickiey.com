@@ -10,12 +10,12 @@ transition(appear:false, v-on:enter="enter", v-on:leave="leave")
         .relative
             .section
                 a.email(href='mailto:{{ data.user }}@{{ data.domain }}')
-                    span.hidden                                             {{ data.user }}
-                    span                                                    @{{ data.domain }}
+                    span.hidden                                             {{ user }}
+                    span                                                    @{{ domain }}
             .absolute
                 a.email(href='mailto:{{ data.user }}@{{ data.domain }}')
-                    span.blink                                              {{ data.user }}
-                    span.hidden                                             @{{ data.domain }}
+                    span.blink                                              {{ user }}
+                    span.hidden                                             @{{ domain }}
                     .underline
         .section
             .description
@@ -25,13 +25,14 @@ transition(appear:false, v-on:enter="enter", v-on:leave="leave")
                 |                                                           素材の製作も承っております。
                 |                                                           なお、実績公開NGのお仕事は受け付けておりません。
         .section
-            .produced                                                       Produced by {{ data.author }}.
+            .produced                                                       Produced by {{ author }}.
 </template>
 
 <script>
-import { onMounted, computed, reactive, watch } from 'vue'
+import { onMounted, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { gsap }     from 'gsap'
+import configJson from '../assets/data/config.json'
 
 export default {
     setup() {
@@ -108,12 +109,9 @@ console.log('contact mountedAction done!')
     //
     // data
     //
-        const data = reactive({
-            sitename: 'pickiey.portfolio',
-            author  : 'pickiey',
-            user    : 'hello',
-            domain  : 'pickiey.com'
-        })
+        const author = configJson.siteinfo.author,
+              user   = configJson.email.user,
+              domain = configJson.email.domain
     //
     // transition
     //
@@ -197,7 +195,7 @@ console.log('contact mountedAction done!')
     // return
     //
         return {
-            data,
+            author, user, domain,
             enter, leave
         }
     } // setup

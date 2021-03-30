@@ -1,24 +1,25 @@
 <template lang="pug">
 .TheBg(ref='root')
     .TheBg_Title(ref='title')
-        .TheBg_TitleShadow(ref='shadow')        {{ data.sitename }}
-        .TheBg_TitleFace(ref='face')            {{ data.sitename }}
+        .TheBg_TitleShadow(ref='shadow')        {{ sitename }}
+        .TheBg_TitleFace(ref='face')            {{ sitename }}
     canvas#canvas
     .TheBg_Layer.TheBg_Layer3(ref='layer3')
         .TheBg_LayerInner
-            .tbc                                {{ data.sitename }}
+            .tbc                                {{ sitename }}
     .TheBg_Layer.TheBg_Layer2(ref='layer2')
         .TheBg_LayerInner
-            .tbc                                {{ data.sitename }}
+            .tbc                                {{ sitename }}
     .TheBg_Layer.TheBg_Layer1(ref='layer1')
         .TheBg_LayerInner
-            .tbc                                {{ data.sitename }}
+            .tbc                                {{ sitename }}
 </template>
 
 <script>
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { gsap }     from 'gsap'
+import configJson from '../assets/data/config.json'
 
 export default {
     setup() {
@@ -56,14 +57,20 @@ console.log('BG         completedAction start!')
             canvasAnimation()
             await delay(130)
             clip1()
+console.log('BG         clip1           done!')
             await delay(130)
             clip2()
+console.log('BG         clip2           done!')
+            await delay(130)
             await delay(130)
             clip3()
+console.log('BG         clip3           done!')
             await delay(200)
             spout()
+console.log('BG         spout           done!')
             await delay(1000)
             leaveLayer()
+console.log('BG         leaveLayer      done!')
             await delay(4000)
             rotate()
 console.log('BG         completedAction done!')
@@ -71,10 +78,8 @@ console.log('BG         completedAction done!')
     //
     // data
     //
-        const data = reactive({
-            sitename : 'pickiey.portfolio',
-            isMobile : store.getters.isMobile
-        }) // data
+        const isMobile = store.getters.isMobile,
+              sitename = configJson.siteinfo.sitename
     //
     // this.$refs
     //
@@ -102,26 +107,31 @@ console.log('BG         completedAction done!')
                     rotation    : 365,
                     ease        : "expo.inOut"
                 })
+                gsap.to('.TheBg_LayerInner', {
+                    duration    : 5,
+                    scale       : 3,
+                    rotation    : 365,
+                    ease        : "expo.inOut"
+                })
                 gsap.to(shadow.value, {
                     duration    : 5,
-                    y           : data.isMobile ? '1.25px' : '2.5px',
-                    x           : data.isMobile ? '1.25px' : '2.5px',
+                    y           : isMobile ? '1.25px' : '2.5px',
+                    x           : isMobile ? '1.25px' : '2.5px',
                     ease        : "expo.inOut"
                 })
                 gsap.to(face.value, {
                     duration    : 5,
-                    y           : data.isMobile ? '-1.25px' : '-2.5px',
-                    x           : data.isMobile ? '-1.25px' : '-2.5px',
+                    y           : isMobile ? '-1.25px' : '-2.5px',
+                    x           : isMobile ? '-1.25px' : '-2.5px',
                     ease        : "expo.inOut"
                 })
             }) // requestAnimationFrame()
         } // spout()
         const leaveLayer = () => {
-            if (data.isMobile) return
-
+            if (isMobile) return
             requestAnimationFrame( () => {
                 gsap.to('.TheBg_LayerInner', {
-                    duration    : 2,
+                    duration    : 3,
                     opacity     : 0,
                     ease        : "expo.inOut"
                 })
@@ -142,7 +152,7 @@ console.log('BG         completedAction done!')
             requestAnimationFrame( () => {
                 gsap.to(layer1.value, {
                     duration    : 1.3,
-                    width       : data.isMobile ? '0%' : '50px',
+                    width       : isMobile ? '0%' : '50px',
                     ease        : "expo.out"
                 })
             }) // requestAnimationFrame
@@ -151,7 +161,7 @@ console.log('BG         completedAction done!')
             requestAnimationFrame( () => {
                 gsap.to(layer2.value, {
                     duration    : 1.3,
-                    width       : data.isMobile ? '0%' : '150px',
+                    width       : isMobile ? '0%' : '150px',
                     ease        : "expo.out"
                 })
             }) // requestAnimationFrame
@@ -160,13 +170,12 @@ console.log('BG         completedAction done!')
             requestAnimationFrame( () => {
                 gsap.to(layer3.value, {
                     duration    : 1.3,
-                    width       : data.isMobile ? '0%' : '300px',
+                    width       : isMobile ? '0%' : '300px',
                     ease        : "expo.out"
                 })
             }) // requestAnimationFrame
         } // clip3
         const canvasAnimation = () => {
-            const isMobile = data.isMobile
             class Particles {
                 constructor() {
                     this.colors         = ['100, 100, 100', '130, 130, 130', '160, 160, 160']
@@ -302,7 +311,7 @@ console.log('BG         completedAction done!')
     // return
     //
         return{
-            data,
+            sitename,
             root, title, shadow, face, layer1, layer2, layer3
         } // return
     } // setup

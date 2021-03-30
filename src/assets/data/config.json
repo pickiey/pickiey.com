@@ -6,6 +6,12 @@
         "facebook"      : "https://www.facebook.com/nitta.1226",
         "github"        : "https://github.com/soichiro-nitta/"
     },
-    "production"    : {},
-    "development"   : {}
+    "siteinfo"      : {
+        "author"        : "pickiey",
+        "sitename"      : "pickiey.portfolio"
+    },
+    "email"         : {
+        "user"          : "hello",
+        "domain"        : "pickiey.com"
+    }
 }

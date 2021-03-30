@@ -2,7 +2,7 @@
 .TheAudio
     audio(
         src='/assets/audio/click.mp3',
-        :autoplay='data.isMobile',
+        :autoplay='isMobile',
         id='sound',
         @canplay='canplaySound'
     )
@@ -11,12 +11,12 @@
         loop,
         id='bgm',
         @canplay='canplayBgm',
-        v-if='!data.isMobile'
+        v-if='!isMobile'
     )
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -29,28 +29,26 @@ export default {
     //
     // data
     //
-        const data = reactive({
-            loadedSound : false,
-            loadedBgm   : false,
-            isMobile    : store.getters.isMobile
-        }) // data
+        const isMobile    = ref(store.getters.isMobile).value
+        let   loadedSound = false,
+              loadedBgm   = false
     //
     // methods
     //
         const canplaySound = () => {
-            data.loadedSound = true
-            if (data.isMobile)      setLoaded()
-            if (data.loadedBgm)     setLoaded()
+            loadedSound = true
+            if (isMobile)  setLoaded()
+            if (loadedBgm) setLoaded()
         } // canplaySound
         const canplayBgm = () => {
-            data.loadedBgm = true
-            if (data.loadedSound)   setLoaded()
+            loadedBgm = true
+            if (loadedSound)   setLoaded()
         } // canplayBgm
     //
     // return
     //
         return{
-            data,
+            isMobile,
             canplaySound, canplayBgm
         } // return
     } // setup
