@@ -18,7 +18,7 @@
                 .underline
     .section
         .description
-            |                                                           ごめんなさい！メールアドレスは現在準備中です！！
+            |                                                           👆お問い合わせはコチラからどうぞ♪
     .section
         .produced                                                       Produced by {{ author }}.
 </template>
