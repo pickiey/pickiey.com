@@ -16,11 +16,11 @@ export default {
     //
         const start = () => {
             loading = true
-console.log('Loading        start!')
+//console.log('Loading        start!')
         }
         const finish = () => {
             loading = false
-console.log('Loading        finish')
+//console.log('Loading        finish')
         }
     //
     // return

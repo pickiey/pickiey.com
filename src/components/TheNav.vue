@@ -4,33 +4,31 @@
         .TheNav_MenuDummy1(ref='menuDummy1')
         .TheNav_MenuDummy2(ref='menuDummy2')
         .TheNav_MenuDummy3(ref='menuDummy3')
+
         .TheNav_MenuFace(ref='menuFace')
+
         .TheNav_MenuContent
             router-link.TheNav_MenuContentLogo(
                 to='/',
                 ref='logo',
-                @click.native='close'
             )
                 .TheNav_MenuContentLogoShadow                            {{ sitename }}
                 .TheNav_MenuContentLogoOver(ref='over')                  {{ sitename }}
             .TheNav_MenuContentList
                 router-link(
                     to='/',
-                    @click.native='close'
                 )
                     .TheNav_MenuContentListEng                           HOME
                     .TheNav_MenuContentListJa                            ホーム
                     .TheNav_MenuContentListMark
                 router-link(
                     to='/about',
-                    @click.native='close'
                 )
                     .TheNav_MenuContentListEng                           ABOUT
                     .TheNav_MenuContentListJa                            {{ author }}について
                     .TheNav_MenuContentListMark
                 router-link(
                     to='/contact',
-                    @click.native='close'
                 )
                     .TheNav_MenuContentListEng                           CONTACT
                     .TheNav_MenuContentListJa                            お問い合わせ
@@ -82,18 +80,18 @@ export default {
             () => completed.value, () => completedAction()
         )
         const completedAction = async() => {
-console.log('Nav        completedAction start!')
+//console.log('Nav        completedAction start!')
             await delay(500)
             enterSwitch()
             if (isMobile) return
             open()
             watchRoute()
-console.log('Nav        completedAction done!')
+//console.log('Nav        completedAction done!')
         } // completedAction
         const watchRoute = () => {
-console.log('Nav        watchRoute      start!')
+//console.log('Nav        watchRoute      start!')
             watch(
-                () => route, () => {
+                () => route.path, () => {
                     nextTick(() => {
                         gsap.to('.TheNav_MenuContentListMark', {
                             duration    : 0.7,
@@ -111,7 +109,7 @@ console.log('Nav        watchRoute      start!')
                     }) // nextTick()
                 }
             ) // watch
-console.log('Nav        watchRoute      done!')
+//console.log('Nav        watchRoute      done!')
         } // watchRoute
     //
     // data
@@ -159,7 +157,8 @@ console.log('Nav        watchRoute      done!')
             progress = false
             opened = true
         } // open
-        const close = async() => {
+        const close = () => console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        const closeaaaaaaaaaaaaaaaaaaaaa = async() => {
             if (!isMobile) return
             if (progress) return
             progress = true

@@ -39,12 +39,12 @@ export default {
             () => painted.value,   () => paintedAction(),
         ) // watch
         const paintedAction = () => {
-console.log('BG         paintedAction   start!')
+//console.log('BG         paintedAction   start!')
             root.value.style.opacity   = 1
             layer1.value.style.opacity = 1
             layer2.value.style.opacity = 1
             layer3.value.style.opacity = 1
-console.log('BG         paintedAction   done!')
+//console.log('BG         paintedAction   done!')
         } // paintedAction
     //
     //
@@ -53,27 +53,27 @@ console.log('BG         paintedAction   done!')
             () => completed.value, () => completedAction()
         ) // watch
         const completedAction = async() => {
-console.log('BG         completedAction start!')
+//console.log('BG         completedAction start!')
             canvasAnimation()
             await delay(130)
             clip1()
-console.log('BG         clip1           done!')
+//console.log('BG         clip1           done!')
             await delay(130)
             clip2()
-console.log('BG         clip2           done!')
+//console.log('BG         clip2           done!')
             await delay(130)
             await delay(130)
             clip3()
-console.log('BG         clip3           done!')
+//console.log('BG         clip3           done!')
             await delay(200)
             spout()
-console.log('BG         spout           done!')
+//console.log('BG         spout           done!')
             await delay(1000)
             leaveLayer()
-console.log('BG         leaveLayer      done!')
+//console.log('BG         leaveLayer      done!')
             await delay(4000)
             rotate()
-console.log('BG         completedAction done!')
+//console.log('BG         completedAction done!')
         } // completedAction
     //
     // data
@@ -301,7 +301,8 @@ console.log('BG         completedAction done!')
                     self.draw(particle, i)
                 } // resetParticle
                 clearCanvas() {
-                    this.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
+                    const self = this
+                    self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
                 } // clearCanvas
             } // class Particles
             const particle = new Particles()

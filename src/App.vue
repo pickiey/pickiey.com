@@ -9,8 +9,7 @@
 </template>
 
 <script>
-import { computed, onMounted, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, watch } from 'vue'
 import { useStore }  from 'vuex'
 import TheBackground from './components/TheBackground.vue'
 import TheNav        from './components/TheNav.vue'
@@ -26,10 +25,6 @@ export default {
     },
     setup() {
     //
-    // router
-    //
-        const router = useRouter()
-    //
     // store
     //
         const store = useStore()
@@ -44,31 +39,9 @@ export default {
             () => painted.value, () => paintedAction()
         ) // watch
         const paintedAction = () => {
-console.log('App        paintedAction   start!')
                 document.getElementById('app').style.background     = '#191919'
                 document.getElementById('scrollArea').style.opacity = '1'
-console.log('App        paintedAction   done!')
         } // paintedAction
-    //
-    // mounted
-    //
-        onMounted(
-            () => mountedAction()
-        ) // onMounted
-        const mountedAction = () => {
-console.log('App        mountedAction   start!')
-            const userAgent = window.navigator.userAgent.toLowerCase()
-            if (
-                userAgent.indexOf('msie')    !== -1 ||
-                userAgent.indexOf('trident') !== -1 ||
-                userAgent.indexOf('edge')    !== -1
-            ) {
-                router.replace({ path: 'sorry' })
-            }
-console.log('App        mountedAction   done!')
-        } // mountedAction
-    //
-    // methods
     //
     } // setup
 } // default

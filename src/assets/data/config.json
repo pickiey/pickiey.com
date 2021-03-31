@@ -1,17 +1,18 @@
 {
     "url"           : {
         "api"           : "",
-        "twitter"       : "https://twitter.com/soichiro_nitta",
-        "instagram"     : "https://www.instagram.com/soichiro.nitta/",
-        "facebook"      : "https://www.facebook.com/nitta.1226",
-        "github"        : "https://github.com/soichiro-nitta/"
+        "twitter"       : "https://twitter.com/pickiey",
+        "instagram"     : "",
+        "facebook"      : "",
+        "github"        : "https://github.com/pickiey",
+        "codepen"       : "https://codepen.io/pickiey"
     },
     "siteinfo"      : {
         "author"        : "pickiey",
         "sitename"      : "pickiey.portfolio"
     },
     "email"         : {
-        "user"          : "hello",
-        "domain"        : "pickiey.com"
+        "user"          : "----------",
+        "domain"        : "-----------"
     }
 }

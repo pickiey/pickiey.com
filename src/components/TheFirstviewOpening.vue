@@ -61,7 +61,7 @@ export default {
             () => started.value, () => startedAction()
         ) // watch
         const startedAction = async() => {
-console.log('FV_Opening startedAction   start!')
+//console.log('FV_Opening startedAction   start!')
             dummy()
             flash()
             await delay(900)
@@ -81,7 +81,7 @@ console.log('FV_Opening startedAction   start!')
             clip()
             await delay(1300)
             kill()
-console.log('FV_Opening startedAction   done!')
+//console.log('FV_Opening startedAction   done!')
         } // startedAction
     //
     // data

@@ -1,31 +1,26 @@
 <template lang="pug">
-transition(appear:false, v-on:enter="enter", v-on:leave="leave")
-    .contact
+.contact(ref='root')
+    .section
+        .helloEng                                                       Please employ me!!!
+        .helloJa                                                        お仕事探してます！！！
+    .separator
+    .section
+      .subTitle                                                         Hello♪
+    .relative
         .section
-            .helloEng                                                       Let's Play Together
-            .helloJa                                                        お仕事募集しています♪
-        .separator
-        .section
-          .subTitle                                                         Say Hello!!
-        .relative
-            .section
-                a.email(href='mailto:{{ data.user }}@{{ data.domain }}')
-                    span.hidden                                             {{ user }}
-                    span                                                    @{{ domain }}
-            .absolute
-                a.email(href='mailto:{{ data.user }}@{{ data.domain }}')
-                    span.blink                                              {{ user }}
-                    span.hidden                                             @{{ domain }}
-                    .underline
-        .section
-            .description
-                |                                                           ご依頼などございましたら、
-                |                                                           上記よりお気軽にご連絡ください。
-                |                                                           デザイン・開発のほか、ロゴ・写真・映像など、
-                |                                                           素材の製作も承っております。
-                |                                                           なお、実績公開NGのお仕事は受け付けておりません。
-        .section
-            .produced                                                       Produced by {{ author }}.
+            a.email(href='mailto:{{ data.user }}@{{ data.domain }}')
+                span.hidden                                             {{ user }}
+                span                                                    @{{ domain }}
+        .absolute
+            a.email(href='mailto:{{ data.user }}@{{ data.domain }}')
+                span.blink                                              {{ user }}
+                span.hidden                                             @{{ domain }}
+                .underline
+    .section
+        .description
+            |                                                           ごめんなさい！メールアドレスは現在準備中です！！
+    .section
+        .produced                                                       Produced by {{ author }}.
 </template>
 
 <script>
@@ -94,7 +89,6 @@ export default {
                     duration        : 0.1
                   })
               }) // requestAnimationFrame
-console.log('contact completedAction done!')
         } // completedAction
     //
     // mounted
@@ -102,10 +96,14 @@ console.log('contact completedAction done!')
         onMounted(
             () => mountedAction()
         ) // onMounted
-        const mountedAction = () => {
+        const mountedAction = async() => {
             document.getElementById('scrollArea').scrollTop = 0
-console.log('contact mountedAction done!')
+            if (completed.value)  enter()
         } // mountedAction
+    //
+    // BeforeUnmount
+    //
+//        onBeforeUnmount( () => leave() )
     //
     // data
     //
@@ -115,7 +113,7 @@ console.log('contact mountedAction done!')
     //
     // transition
     //
-        const enter = (_, done) => {
+        const enter = () => {
             requestAnimationFrame(() => {
                 gsap.to('.blink', {
                     duration        : 1,
@@ -144,8 +142,7 @@ console.log('contact mountedAction done!')
                     ease            : "back.out(3)",
                     startAt         : {y: '40px', opacity: 0},
                     delay           : 0.2,
-                    stagger         : 0.1,
-                    onComplete      : () => done()
+                    stagger         : 0.1
                 })
                 gsap.to('.separator', {
                     duration        : 1,
@@ -160,43 +157,41 @@ console.log('contact mountedAction done!')
                 })
             }) // requestAnimationFrame
         } // enter
-        const leave = (_, done) => {
-            requestAnimationFrame(() => {
-                gsap.to('.blink', {
-                    duration        : 0.7,
-                    opacity         : 0,
-                    ease            : "back.in(5)"
-                })
-                gsap.to('.underline', {
-                    duration        : 0.7,
-                    scaleX          : 0,
-                    ease            : "back.in(5)"
-                })
-                gsap.to('.section', {
-                    duration        : 0.7,
-                    y               : '-40px',
-                    opacity         : 0,
-                    ease            : "back.in(3)",
-                    stagger         : 0.1,
-                    onComplete      : () => done()
-                })
-                gsap.to('.separator', {
-                    duration        : 0.7,
-                    scaleX          : 0,
-                    x               : '20px',
-                    opacity         : 0,
-                    transformOrigin : 'right center',
-                    ease            : "back.in(3)",
-                    stagger         : 0.1
-                })
-            }) // requestAnimationFrame
-        } // leave
+//        const leave = () => {
+//            requestAnimationFrame(() => {
+//                gsap.to('.blink', {
+//                    duration        : 0.7,
+//                    opacity         : 0,
+//                    ease            : "back.in(5)"
+//                })
+//                gsap.to('.underline', {
+//                    duration        : 0.7,
+//                    scaleX          : 0,
+//                    ease            : "back.in(5)"
+//                })
+//                gsap.to('.section', {
+//                    duration        : 0.7,
+//                    y               : '-40px',
+//                    opacity         : 0,
+//                    ease            : "back.in(3)",
+//                    stagger         : 0.1
+//                })
+//                gsap.to('.separator', {
+//                    duration        : 0.7,
+//                    scaleX          : 0,
+//                    x               : '20px',
+//                    opacity         : 0,
+//                    transformOrigin : 'right center',
+//                    ease            : "back.in(3)",
+//                    stagger         : 0.1
+//                })
+//            }) // requestAnimationFrame
+//        } // leave
     //
     // return
     //
         return {
-            author, user, domain,
-            enter, leave
+            author, user, domain
         }
     } // setup
 } // default

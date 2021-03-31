@@ -26,14 +26,14 @@ export default {
             () => loaded.value, () => loadedAction()
         ) // watch
         const loadedAction = async() => {
-console.log('FV_Start   loadedAction    start!')
+//console.log('FV_Start   loadedAction    start!')
             await delay(3600)
             enter()
             await delay(200)
             effect()
             await delay(800)
             clickable = true
-console.log('FV_Start   loadedAction    done!')
+//console.log('FV_Start   loadedAction    done!')
         } // loadedAction
     //
     // data
@@ -48,14 +48,14 @@ console.log('FV_Start   loadedAction    done!')
         const click = async() => {
             if (!clickable) return
             clickable = false
-            playMp3()
+//            playMp3()
             start()
             leave()
             await delay(600)
             off.value = true
         } // click
         const enter = () => {
-console.log('FV_Start   enter           start!')
+//console.log('FV_Start   enter           start!')
             requestAnimationFrame(() => {
                 gsap.to('.TheFirstviewStart_Letter', {
                     duration    :1.5,
@@ -66,10 +66,10 @@ console.log('FV_Start   enter           start!')
                     stagger     : 0.05
                 })
             }) // requestAnimationFrame
-console.log('FV_Start   enter           done!')
+//console.log('FV_Start   enter           done!')
         } // enter
         const effect = () => {
-console.log('FV_Start   effect          start!')
+//console.log('FV_Start   effect          start!')
             requestAnimationFrame(() => {
                 gsap.to('.TheFirstviewStart_Letter', {
                     duration    : 0.3,
@@ -81,15 +81,15 @@ console.log('FV_Start   effect          start!')
                                     each    : 0.1
                                   }
                 })
-console.log('FV_Start   effect          done!')
+//console.log('FV_Start   effect          done!')
             }) // requestAnimationFrame
         } // effect
-        const playMp3 = () => {
-            document.getElementById('sound').play()
-            if (!isMobile) document.getElementById('bgm').play()
-        } // playMp3
+//        const playMp3 = () => {
+//            document.getElementById('sound').play()
+//            if (!isMobile) document.getElementById('bgm').play()
+//        } // playMp3
         const leave = () => {
-console.log('FV_Start   leave           start!')
+//console.log('FV_Start   leave           start!')
             requestAnimationFrame(() => {
                 gsap.to('.TheFirstviewStart', {
                     duration    : 0.6,
@@ -97,7 +97,7 @@ console.log('FV_Start   leave           start!')
                     scale       : 2,
                     ease        : "expo.inOut"
                 })
-console.log('FV_Start   leave           done!')
+//console.log('FV_Start   leave           done!')
             }) // requestAnimationFrame
         } // leave
     //
