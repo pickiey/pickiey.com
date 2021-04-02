@@ -89,42 +89,30 @@ export default {
         const sitename = configJson.siteinfo.sitename
         const data = reactive({
             listInit    : [
-                            { id: 16, value: 'o' },
-                            { id: 14, value: 'i' },
-                            { id: 12, value: 'l' },
-                            { id: 10, value: 'o' },
-                            { id:  8, value: 'f' },
-                            { id:  6, value: 't' },
-                            { id:  4, value: 'r' },
-                            { id:  2, value: 'o' },
-                            { id:  1, value: 'p' },
-                            { id:  3, value: '.' },
-                            { id:  5, value: 'y' },
-                            { id:  7, value: 'e' },
+                            { id: 10, value: 'm' },
+                            { id:  8, value: 'o' },
+                            { id:  6, value: 'c' },
+                            { id:  4, value: '.' },
+                            { id:  2, value: 'y' },
+                            { id:  1, value: 'e' },
+                            { id:  3, value: 'i' },
+                            { id:  5, value: 'k' },
+                            { id:  7, value: 'c' },
                             { id:  9, value: 'i' },
-                            { id: 11, value: 'k' },
-                            { id: 13, value: 'c' },
-                            { id: 15, value: 'i' },
-                            { id: 17, value: 'p' }
+                            { id: 11, value: 'p' }
                           ],
             listNormal  : [
-                            { id: 17, value: 'p' },
-                            { id: 15, value: 'i' },
-                            { id: 13, value: 'c' },
-                            { id: 11, value: 'k' },
+                            { id: 11, value: 'p' },
                             { id:  9, value: 'i' },
-                            { id:  7, value: 'e' },
-                            { id:  5, value: 'y' },
-                            { id:  3, value: '.' },
-                            { id:  1, value: 'p' },
-                            { id:  2, value: 'o' },
-                            { id:  4, value: 'r' },
-                            { id:  6, value: 't' },
-                            { id:  8, value: 'f' },
-                            { id: 10, value: 'o' },
-                            { id: 12, value: 'l' },
-                            { id: 14, value: 'i' },
-                            { id: 16, value: 'o' }
+                            { id:  7, value: 'c' },
+                            { id:  5, value: 'k' },
+                            { id:  3, value: 'i' },
+                            { id:  1, value: 'e' },
+                            { id:  2, value: 'y' },
+                            { id:  4, value: '.' },
+                            { id:  6, value: 'c' },
+                            { id:  8, value: 'o' },
+                            { id: 10, value: 'm' }
                           ]
         }) // data
     //
