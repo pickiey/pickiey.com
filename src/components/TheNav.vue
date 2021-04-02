@@ -157,8 +157,7 @@ export default {
             progress = false
             opened = true
         } // open
-        const close = () => console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-        const closeaaaaaaaaaaaaaaaaaaaaa = async() => {
+        const close = async() => {
             if (!isMobile) return
             if (progress) return
             progress = true
