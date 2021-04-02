@@ -31,4 +31,18 @@ npm run dev
 
 ## 参考
 
+デザインとかアニメーションは下記のパクリ(((
+
 - [soichiro-nitta/2018.nitta.studio](https://github.com/soichiro-nitta/2018.nitta.studio)
+
+変更箇所は以下の通り
+
+- 使用ライブラリの最新化
+    - Nuxt(Vue 2) : Option API ---> Vite + Vue 3 : Composition API
+    - GSAP 2 ---> GSAP 3
+- ルーティン簡略化(邪魔くさいので省いた)
+    - 音の再生機能
+    - 一部トランジション(Leave)
+    - ブラウザ非対応ページ
+    - 404ページ
+
