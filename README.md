@@ -1,6 +1,6 @@
 # Pickiey.com
 
-公開サイトは👉[コチラ](https://pickiey.com){:target="_blank"}
+公開サイトは👉[コチラ](https://pickiey.com)
 
 --------------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@
     - HTML ---> Pug
     - CSS  ---> Stylus
 
-## お試し方法
+## セットアップと実行
 
 ```sh
 git clone https://github.com/pickiey/vite.git 適当なフォルダ名
@@ -31,4 +31,4 @@ npm run dev
 
 ## 参考
 
-- [soichiro-nitta/2018.nitta.studio](https://github.com/soichiro-nitta/2018.nitta.studio){:target="_blank"}
+- [soichiro-nitta/2018.nitta.studio](https://github.com/soichiro-nitta/2018.nitta.studio)
