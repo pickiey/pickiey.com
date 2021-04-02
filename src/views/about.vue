@@ -19,6 +19,13 @@
             |                                               このWebサイトは
             br
             |                                               Vue3(Composition API) + GSAP v3 で実装しています。
+            br
+            br
+            |                                               ソースコードは👉
+            a(
+              href="https://github.com/pickiey/vite",
+              target='_blank'
+            )                                               コチラ
     .separator
     .section
         .subTitle                                           01. Skillset
@@ -231,6 +238,17 @@ export default {
         line-height                 2
         +large()
             font-size               largeFont13
+        a
+            display                 inline-block
+            position                relative
+            &:after
+                content             ''
+                position            absolute
+                left                0
+                bottom              5px
+                width               100%
+                height              1px
+                background          #555
     .skillset
         margin-top                  30px
         +large()
