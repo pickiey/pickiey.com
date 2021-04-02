@@ -10,25 +10,25 @@
         .TheNav_MenuContent
             router-link.TheNav_MenuContentLogo(
                 to='/',
-                ref='logo',
+                ref='logo'
             )
                 .TheNav_MenuContentLogoShadow                            {{ sitename }}
                 .TheNav_MenuContentLogoOver(ref='over')                  {{ sitename }}
             .TheNav_MenuContentList
                 router-link(
-                    to='/',
+                    to='/'
                 )
                     .TheNav_MenuContentListEng                           HOME
                     .TheNav_MenuContentListJa                            ホーム
                     .TheNav_MenuContentListMark
                 router-link(
-                    to='/about',
+                    to='/about'
                 )
                     .TheNav_MenuContentListEng                           ABOUT
                     .TheNav_MenuContentListJa                            {{ author }}について
                     .TheNav_MenuContentListMark
                 router-link(
-                    to='/contact',
+                    to='/contact'
                 )
                     .TheNav_MenuContentListEng                           CONTACT
                     .TheNav_MenuContentListJa                            お問い合わせ
@@ -83,8 +83,7 @@ export default {
 //console.log('Nav        completedAction start!')
             await delay(500)
             enterSwitch()
-            if (isMobile) return
-            open()
+            if (!isMobile) open()
             watchRoute()
 //console.log('Nav        completedAction done!')
         } // completedAction
@@ -92,6 +91,7 @@ export default {
 //console.log('Nav        watchRoute      start!')
             watch(
                 () => route.path, () => {
+                    close()
                     nextTick(() => {
                         gsap.to('.TheNav_MenuContentListMark', {
                             duration    : 0.7,
@@ -144,7 +144,7 @@ export default {
     // methods
     //
         const delay = (ms) => new Promise(_ => setTimeout(_, ms))
-        const toggle = () => {
+        const toggle = async() => {
             !opened ? open() : close()
         } // toggle
         const open = async() => {
