@@ -27,12 +27,10 @@ npm run dev
 
 ## 元ネタ
 
-デザインとかアニメーション表現は下記のパクリ
-
 - [soichiro-nitta/2018.nitta.studio](https://github.com/soichiro-nitta/2018.nitta.studio)
 
 
-## 元ネタからの変更箇所
+### 変更箇所
 
 - 使用ライブラリの更新
     - Nuxt(Vue 2) : Option API ---> Vite + Vue 3 : Composition API
@@ -40,13 +38,7 @@ npm run dev
 - 機能削除
     - 音の再生機能
     - 一部トランジション(Leave)
-
-- ルーティン簡略化(邪魔くさいので)
+- ルーティン簡略化
     - ブラウザ非対応ページ
     - 404ページ
 
-Vue や GSAP は バージョンアップで書き方や仕様が変わったりしていて､
-ネットの情報は大抵 Vue 2 ､ GSAP 2 の ことだったりするので
-公式のドキュメントを確認すること推奨｡
-
-特に Vue 3 の Composition API での書き方とかは まだ参考文献少ないので苦しい｡
