@@ -4,7 +4,7 @@
 
 ## 使用ライブラリ
 
-- フロントエンド
+- UI
     - Vue  3
     - Vuex 4
     - Vue-router 4
