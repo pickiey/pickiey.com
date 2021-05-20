@@ -1,11 +1,11 @@
 <template lang="pug">
 .contact(ref='root')
     .section
-        .helloEng                                                       Please employ me!!!
-        .helloJa                                                        お仕事探してます！！！
+        .helloEng                                                       Feel free to contact me
+        .helloJa                                                        お気軽にお問い合わせください
     .separator
     .section
-      .subTitle                                                         Hello♪
+      .subTitle                                                         e-mail adress
     .relative
         .section
             a.email(href='mailto:{{ data.user }}@{{ data.domain }}')
@@ -18,9 +18,9 @@
                 .underline
     .section
         .description
-            |                                                           👆お問い合わせはコチラからどうぞ♪
-    .section
-        .produced                                                       Produced by {{ author }}.
+            |                                                           お問い合わせは上記からどうぞ
+//-    .section
+//-        .produced                                                       Produced by {{ author }}.
 </template>
 
 <script>

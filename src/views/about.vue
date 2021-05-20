@@ -1,34 +1,40 @@
 <template lang="pug">
 .about(ref='root')
-    //-.section
-    //-    .helloEng                                           I wanna be a Web Designer
-    //-    .helloJa                                            ワナビーデザイナー
-    //-.separator
+    .section
+        .helloEng                                           Line of thinking
+        .helloJa                                            価値観
+    .separator
     .section
         .intro
-            |                                               Webデザイナーになりたい人。
+            |                                               企業やお店の強みをブランドとして育て、良さを伝える、
+            |                                               この2点を大事にしたいです。
             br
             br
-            |                                               ユーザーをワクワクさせられるような
-            |                                               インタラクティブなWebサイトを作りたいので、
+            |                                               Adobeソフトを使用したグラフィック作成のスキルは
+            |                                               まだまだですが、フロントエンド含むコーディングには
+            |                                               自信があります。
             br
-            |                                               フロントエンドに注力しています。
+            br
+            |                                               ユーザーの操作にあわせてアニメーションしたり
+            |                                               なめらかにCGが動くようなサイトで
+            |                                               ユーザーにワクワクしてもらえるよう、
+            |                                               Vue.jsなどのUIライブラリや、WEBGLでのクリエイティブコーディングの
+            |                                               スキルを伸ばしていきたいです。
             br
             br
-            |                                               流行りのフレームワークの学習も兼ねて、
-            |                                               このWebサイトは
+            |                                               今のスキルでできることを詰め込むため、当サイトは
             br
             |                                               Vue3(Composition API) + GSAP v3 で実装しています。
             br
             br
-            |                                               ソースコードは👉
+            |                                               ソースコードは
             a(
               href="https://github.com/pickiey/vite",
               target='_blank'
             )                                               コチラ
     .separator
     .section
-        .subTitle                                           01. Skillset
+        .subTitle                                           Skillset
         ul.skillset
             li                                              Markup
                 span                                        ---
@@ -59,14 +65,14 @@
             li                                              etc...
     .separator
     .section
-        .subTitle                                           02. Welcome
-        .welcome                                            お仕事探してます！
+        .subTitle                                           Recruit
+        .welcome                                            WEB制作に関わるお仕事を探しています。
             br
             router-link(to='/contact')                      コチラ
             |                                               からお問い合わせください！
     .separator
     .section
-        .subTitle                                           03. Social
+        .subTitle                                           Social
         .social
             a(
               :href='url.github',

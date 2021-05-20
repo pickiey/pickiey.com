@@ -1,35 +1,40 @@
 <template lang="pug">
 .home(ref='root')
     .section
-        .helloEng                       Hello World!!
-        .helloJa                        はろーわーるど！
+        .helloEng                       Hello, nice to meet you
+        .helloJa                        はじめまして
     .separator
     .section
         .nameEng                        {{ author }}
         //- h1.nameJa                       {{ author }}
     .separator
     .section
-        .subTitle                       01. Info
+        .subTitle                       Info
         .intro
-            |                           前職では生産技術職をしていました｡
-            br
-            |                           WEB制作の仕事をしたいと思い、
-            |                           20年11月末に退職してから､
-            br
-            |                           職業訓練校に通ってWebデザインを勉強しています。
+            |                           大学卒業後、自動車部品メーカーで生産プロセスエンジニアをしていました。
             br
             br
-            router-link(to='/about')    もっと詳しく！
+            |                           「良いものを作る」ことに加えて、「作ったものの良さを伝える」ことの
+            |                           重要性を認識してから、ブランドをどうやって定義して成長させていくかを
+            |                           考えています。
+            br
+            br
+            |                           企業のブレンディングに関わる仕事として、Webデザイナーへ転職するため、
+            |                           2020年11月に退職してから独学でコーディングを学んだ後、
+            |                           Adobeソフトの使用スキルを身につけるため、21年1月から職業訓練校に通っています。
+            br
+            br
+            router-link(to='/about')    もっと詳しく
     .separator
     .section
-        .subTitle                       02. History
+        .subTitle                       History
         ul.history
             li                          名古屋工業大学 電気電子工学科 卒業
                 .date                   2018.03
             li                          自動車の部品メーカーにて生産技術職 @豊田
-              .date                     2018.04 ~ 2020.10
+                .date                   2018.04 ~ 2020.11
             li                          職業訓練Webデザイナー科受講 @名古屋
-              .date                     2021.01 ~
+                .date                   2021.01 ~
 </template>
 
 <script>
