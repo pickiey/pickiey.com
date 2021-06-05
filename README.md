@@ -1,6 +1,6 @@
 # pickiey.com
 
-公開サイト : [https://pickiey.com](https://pickiey.com)
+公開サイト : [pickiey.com](https://pickiey.com)
 
 ## 使用ライブラリ
 
