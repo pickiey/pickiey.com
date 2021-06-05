@@ -1,6 +1,6 @@
 # pickiey.com
 
-公開サイトは👉[コチラ](https://pickiey.com)
+公開サイト : [https://pickiey.com](https://pickiey.com)
 
 ## 使用ライブラリ
 
@@ -25,20 +25,20 @@ npm install
 npm run dev
 ```
 
-## 元ネタ
+## 参考
 
 - [soichiro-nitta/2018.nitta.studio](https://github.com/soichiro-nitta/2018.nitta.studio)
 
 
-### 変更箇所
+### 変更
 
-- 使用ライブラリの更新
+- 使用ライブラリ
     - Nuxt(Vue 2) : Option API ---> Vite + Vue 3 : Composition API
     - GSAP 2 ---> GSAP 3
-- 機能削除
+- 無効化した機能
     - 音の再生機能
     - 一部トランジション(Leave)
-- ルーティン簡略化
+- 要ルーティン追加
     - ブラウザ非対応ページ
     - 404ページ
 
