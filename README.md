@@ -1,4 +1,4 @@
-# Pickiey.com
+# pickiey.com
 
 公開サイトは👉[コチラ](https://pickiey.com)
 
