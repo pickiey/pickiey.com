@@ -19,7 +19,7 @@
 ## セットアップと実行
 
 ```sh
-git clone https://github.com/pickiey/vite.git 適当なフォルダ名
+git clone https://github.com/pickiey/pickiey.com.git 適当なフォルダ名
 cd フォルダ名
 npm install
 npm run dev
