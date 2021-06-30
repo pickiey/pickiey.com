@@ -37,12 +37,12 @@ export default {
     //
         const canplaySound = () => {
             loadedSound = true
-            if (isMobile)  setLoaded()
-            if (loadedBgm) setLoaded()
+            if (isMobile)       setLoaded()
+            if (loadedBgm)      setLoaded()
         } // canplaySound
         const canplayBgm = () => {
             loadedBgm = true
-            if (loadedSound)   setLoaded()
+            if (loadedSound)    setLoaded()
         } // canplayBgm
     //
     // return

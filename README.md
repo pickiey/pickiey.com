@@ -1,9 +1,7 @@
 # pickiey.com
-
 公開サイト : [pickiey.com](https://pickiey.com)
 
 ## 使用ライブラリ
-
 - UI
     - Vue  3
     - Vuex 4
@@ -31,14 +29,15 @@ npm run dev
 
 
 ### 変更
-
 - 使用ライブラリ
     - Nuxt(Vue 2) : Option API ---> Vite + Vue 3 : Composition API
     - GSAP 2 ---> GSAP 3
 - 無効化した機能
-    - 音の再生機能
     - 一部トランジション(Leave)
 - 要ルーティン追加
     - ブラウザ非対応ページ
     - 404ページ
 
+### 音源
+- クリック音 : [魔王魂 - ピアノ2-7シ](https://maou.audio/se_inst_piano2_7si/)
+- BGM : [かまたまご - ジムノペディ第1番](https://kamatamago.com/sozai/00043/00043.html)

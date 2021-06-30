@@ -48,7 +48,7 @@ export default {
         const click = async() => {
             if (!clickable) return
             clickable = false
-//            playMp3()
+            if (!isMobile) playMp3()
             start()
             leave()
             await delay(600)
@@ -84,10 +84,11 @@ export default {
 //console.log('FV_Start   effect          done!')
             }) // requestAnimationFrame
         } // effect
-//        const playMp3 = () => {
-//            document.getElementById('sound').play()
-//            if (!isMobile) document.getElementById('bgm').play()
-//        } // playMp3
+        const playMp3 = async() => {
+            document.getElementById('sound').play()
+            await delay(3000)
+            document.getElementById('bgm').play()
+        } // playMp3
         const leave = () => {
 //console.log('FV_Start   leave           start!')
             requestAnimationFrame(() => {

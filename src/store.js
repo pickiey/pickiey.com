@@ -29,7 +29,6 @@ const mutations = {
 }
 
 const storeOptions = {
-    //state() { return state },
     state     : state,
     getters   : getters,
     mutations : mutations
