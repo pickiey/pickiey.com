@@ -1,30 +1,12 @@
 <template lang="pug">
 .about(ref='root')
     .section
-        .helloEng                                           Line of thinking
-        .helloJa                                            価値観
+        .helloEng                                           About
+        .helloJa                                            このサイトについて
     .separator
     .section
         .intro
-            |                                               企業やお店の強みをブランドとして育て、良さを伝える、
-            |                                               この2点を大事にしたいです。
-            br
-            br
-            |                                               Adobeソフトを使用したグラフィック作成のスキルは
-            |                                               まだまだですが、フロントエンド含むコーディングには
-            |                                               自信があります。
-            br
-            br
-            |                                               ユーザーの操作にあわせてアニメーションしたり
-            |                                               なめらかにCGが動くようなサイトで
-            |                                               ユーザーにワクワクしてもらえるよう、
-            |                                               Vue.jsなどのUIライブラリや、WEBGLでのクリエイティブコーディングの
-            |                                               スキルを伸ばしていきたいです。
-            br
-            br
-            |                                               今のスキルでできることを詰め込むため、当サイトは
-            br
-            |                                               Vue3(Composition API) + GSAP v3 で実装しています。
+            |                                               当サイトはVue3(Composition API) + GSAP v3 で実装しています。
             br
             br
             |                                               ソースコードは
@@ -66,7 +48,7 @@
     .separator
     .section
         .subTitle                                           Recruit
-        .welcome                                            WEB制作に関わるお仕事を探しています。
+        .welcome                                            コーダーのお仕事を探しています。
             br
             router-link(to='/contact')                      コチラ
             |                                               からお問い合わせください！
